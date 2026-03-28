@@ -64,7 +64,7 @@ export default function Hero() {
       <div className="relative z-10 max-w-5xl mx-auto">
         <p
           ref={labelRef}
-          className="text-label text-accent mb-8 opacity-0 hidden md:block"
+          className="text-label text-accent mb-8 opacity-0"
         >
           Custom Software Consultancy
         </p>
