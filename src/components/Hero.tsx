@@ -50,7 +50,7 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 md:px-10 text-center overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center px-6 md:px-10 pt-24 md:pt-0 text-center overflow-hidden"
     >
       {/* Subtle radial gradient background */}
       <div
@@ -64,7 +64,7 @@ export default function Hero() {
       <div className="relative z-10 max-w-5xl mx-auto">
         <p
           ref={labelRef}
-          className="text-label text-accent mb-8 opacity-0"
+          className="text-label text-accent mb-8 opacity-0 hidden md:block"
         >
           Custom Software Consultancy
         </p>
