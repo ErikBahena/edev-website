@@ -73,12 +73,12 @@ export default function CaseStudies() {
               </div>
 
               {/* Main grid: metric left, content right */}
-              <div className="grid md:grid-cols-[auto_1fr] gap-10 md:gap-20 items-start">
+              <div className="grid md:grid-cols-[2fr_3fr] gap-10 md:gap-16 items-start">
 
                 {/* Metric column */}
-                <div className="case-reveal opacity-0 md:w-64">
+                <div className="case-reveal opacity-0">
                   <div className="font-display font-bold text-blue leading-none"
-                    style={{ fontSize: "clamp(5rem, 14vw, 13rem)", letterSpacing: "-0.05em" }}>
+                    style={{ fontSize: "clamp(5rem, 9vw, 10rem)", letterSpacing: "-0.05em" }}>
                     {c.metric}
                   </div>
                   <p className="font-display text-sm font-medium mt-3" style={{ color: "rgba(255,255,255,0.25)" }}>
