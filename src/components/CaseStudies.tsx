@@ -43,7 +43,7 @@ export default function CaseStudies() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-36 px-6 md:px-14 bg-navy">
+    <section id="work" ref={sectionRef} className="py-24 md:py-36 px-6 md:px-14 bg-navy">
       <div className="max-w-7xl mx-auto">
 
         {/* Section header */}
