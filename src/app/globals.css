@@ -1,29 +1,46 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #0A0A0A;
-  --bg-elevated: #141414;
-  --bg-card: #1A1A1A;
-  --text: #F0EDE8;
-  --text-muted: #7A7A7A;
-  --text-dim: #4A4A4A;
-  --accent: #C8A97E;
-  --accent-hover: #D4B88A;
-  --accent-dim: rgba(200, 169, 126, 0.15);
-  --border: #222222;
-  --radius: 1rem;
+  /* ── Core Palette ── */
+  --bg: #F5F2EC;           /* warm cream */
+  --bg-elevated: #EDE9E1;  /* slightly deeper cream */
+  --bg-section: #E8E3D9;   /* section divider cream */
+
+  --navy: #0D1B3E;         /* deep Eagles navy — dark sections */
+  --navy-mid: #162852;     /* mid navy */
+
+  --blue: #034CB2;         /* Eagles royal blue — primary */
+  --blue-dark: #023594;    /* pressed/hover blue */
+  --blue-light: #E8EFFA;   /* blue tint for backgrounds */
+
+  --amber: #C4882A;        /* river amber — accent */
+  --amber-light: #F5E9D4;  /* amber tint */
+
+  --text: #0D1B3E;         /* navy for body text */
+  --text-muted: #5A6478;   /* muted blue-gray */
+  --text-dim: #9AA3B2;     /* dimmed */
+
+  --white: #FFFFFF;
+  --cream: #F5F2EC;
+
+  --border: #D8D2C6;
+  --border-dark: rgba(255,255,255,0.1);
+
+  --radius: 0.75rem;
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-bg-elevated: var(--bg-elevated);
-  --color-bg-card: var(--bg-card);
+  --color-navy: var(--navy);
+  --color-blue: var(--blue);
+  --color-blue-dark: var(--blue-dark);
+  --color-blue-light: var(--blue-light);
+  --color-amber: var(--amber);
+  --color-amber-light: var(--amber-light);
   --color-text: var(--text);
   --color-text-muted: var(--text-muted);
   --color-text-dim: var(--text-dim);
-  --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
-  --color-accent-dim: var(--accent-dim);
   --color-border: var(--border);
   --font-sans: var(--font-space-grotesk);
   --font-body: var(--font-inter);
@@ -44,7 +61,7 @@
 html {
   background: var(--bg);
   color: var(--text);
-  scroll-behavior: auto; /* Lenis handles smooth scroll */
+  scroll-behavior: auto;
 }
 
 body {
@@ -53,15 +70,15 @@ body {
   overflow-x: hidden;
 }
 
-/* ─── Film Grain Overlay ─── */
+/* ─── Film Grain ─── */
 
 .grain-overlay {
   position: fixed;
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.04;
-  mix-blend-mode: overlay;
+  opacity: 0.025;
+  mix-blend-mode: multiply;
 }
 
 .grain-overlay svg {
@@ -69,7 +86,7 @@ body {
   height: 100%;
 }
 
-/* ─── Smooth Scroll Container ─── */
+/* ─── Lenis ─── */
 
 html.lenis,
 html.lenis body {
@@ -78,10 +95,6 @@ html.lenis body {
 
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
 }
 
 .lenis.lenis-stopped {
@@ -102,29 +115,29 @@ html.lenis body {
 }
 
 .text-section-heading {
-  font-size: clamp(2rem, 5vw, 5rem);
+  font-size: clamp(2rem, 5vw, 4.5rem);
   line-height: 1.1;
   letter-spacing: -0.02em;
   font-weight: 700;
 }
 
 .text-manifesto {
-  font-size: clamp(1.5rem, 3.5vw, 3.5rem);
-  line-height: 1.3;
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  line-height: 1.35;
   letter-spacing: -0.01em;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .text-body-lg {
-  font-size: clamp(1rem, 1.25vw, 1.25rem);
-  line-height: 1.7;
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  line-height: 1.75;
 }
 
 .text-label {
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /* ─── Custom Cursor ─── */
@@ -132,77 +145,89 @@ html.lenis body {
 .cursor-dot {
   width: 8px;
   height: 8px;
-  background: var(--text);
+  background: var(--blue);
   border-radius: 50%;
   position: fixed;
   top: 0;
   left: 0;
   pointer-events: none;
   z-index: 99999;
-  mix-blend-mode: difference;
-  transition: width 0.2s ease, height 0.2s ease, margin 0.2s ease;
+  transition: width 0.2s ease, height 0.2s ease;
 }
 
 .cursor-ring {
-  width: 40px;
-  height: 40px;
-  border: 1.5px solid var(--text);
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--blue);
   border-radius: 50%;
   position: fixed;
   top: 0;
   left: 0;
   pointer-events: none;
   z-index: 99998;
-  mix-blend-mode: difference;
-  transition: width 0.3s ease, height 0.3s ease, margin 0.3s ease, border-color 0.3s ease;
-  opacity: 0.5;
+  opacity: 0.4;
+  transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
 }
 
 .cursor-dot.hovering {
-  width: 60px;
-  height: 60px;
-  margin: -26px 0 0 -26px;
-  background: transparent;
-  border: 1.5px solid var(--text);
+  background: var(--amber);
+  width: 12px;
+  height: 12px;
 }
 
 .cursor-ring.hovering {
-  width: 60px;
-  height: 60px;
-  margin: -10px 0 0 -10px;
-  opacity: 0;
+  width: 52px;
+  height: 52px;
+  border-color: var(--amber);
+  opacity: 0.3;
 }
 
-/* ─── Magnetic Button ─── */
+/* ─── Buttons ─── */
 
-.magnetic-btn {
-  position: relative;
+.btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   padding: 1rem 2.5rem;
-  background: var(--accent);
-  color: var(--bg);
+  background: var(--blue);
+  color: var(--white);
   font-family: var(--font-space-grotesk), system-ui, sans-serif;
   font-weight: 600;
   font-size: 0.95rem;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   border-radius: 100px;
   border: none;
-  transition: background 0.3s ease, transform 0.15s ease;
-  overflow: hidden;
+  transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
+  box-shadow: 0 2px 12px rgba(3, 76, 178, 0.25);
 }
 
-.magnetic-btn:hover {
-  background: var(--accent-hover);
+.btn-primary:hover {
+  background: var(--blue-dark);
+  box-shadow: 0 4px 20px rgba(3, 76, 178, 0.35);
+  transform: translateY(-1px);
 }
 
-.magnetic-btn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
-  border-radius: inherit;
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2.5rem;
+  background: transparent;
+  color: var(--white);
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  border-radius: 100px;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.btn-outline:hover {
+  border-color: var(--white);
+  background: rgba(255,255,255,0.08);
 }
 
 /* ─── Marquee ─── */
@@ -210,7 +235,7 @@ html.lenis body {
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 30s linear infinite;
+  animation: marquee 35s linear infinite;
 }
 
 .marquee-track:hover {
@@ -222,62 +247,39 @@ html.lenis body {
   to { transform: translateX(-50%); }
 }
 
-/* ─── Section Transitions ─── */
-
-.section-reveal {
-  opacity: 0;
-  transform: translateY(40px);
-}
-
-.section-reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ─── Manifesto Line ─── */
-
-.manifesto-line {
-  opacity: 0.15;
-  transition: opacity 0.6s ease;
-}
-
-.manifesto-line.active {
-  opacity: 1;
-}
-
-/* ─── Process Card ─── */
+/* ─── Cards ─── */
 
 .process-card {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 2.5rem;
-  background: var(--bg-elevated);
-  transition: border-color 0.3s ease, transform 0.3s ease;
+  background: var(--white);
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .process-card:hover {
-  border-color: var(--accent);
+  border-color: var(--blue);
   transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(3, 76, 178, 0.1);
 }
-
-/* ─── Case Study Card ─── */
 
 .case-card {
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: var(--bg-elevated);
+  background: var(--white);
   overflow: hidden;
-  transition: border-color 0.4s ease, transform 0.3s ease;
+  transition: border-color 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .case-card:hover {
-  border-color: var(--accent);
+  border-color: var(--blue);
   transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(3, 76, 178, 0.1);
 }
 
 .case-card-accent {
   height: 4px;
-  background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+  background: linear-gradient(90deg, var(--blue) 0%, var(--amber) 100%);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.5s ease;
@@ -287,33 +289,21 @@ html.lenis body {
   transform: scaleX(1);
 }
 
-/* ─── Stat Counter ─── */
-
-.stat-item {
-  text-align: center;
-}
+/* ─── Stats ─── */
 
 .stat-number {
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-size: clamp(2.5rem, 5vw, 5rem);
   font-weight: 700;
   letter-spacing: -0.03em;
-  color: var(--accent);
+  color: var(--blue);
   line-height: 1;
-}
-
-/* ─── Divider ─── */
-
-.section-divider {
-  width: 100%;
-  height: 1px;
-  background: var(--border);
 }
 
 /* ─── Selection ─── */
 
 ::selection {
-  background: var(--accent);
-  color: var(--bg);
+  background: var(--blue);
+  color: var(--white);
 }
 
 /* ─── Scrollbar ─── */
@@ -323,7 +313,7 @@ html.lenis body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg);
+  background: var(--bg-elevated);
 }
 
 ::-webkit-scrollbar-thumb {

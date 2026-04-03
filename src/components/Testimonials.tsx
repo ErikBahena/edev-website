@@ -22,13 +22,11 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
-  const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     cardsRef.current.forEach((card, i) => {
       if (!card) return;
-
       gsap.fromTo(
         card,
         { opacity: 0, y: 40 },
@@ -36,52 +34,45 @@ export default function Testimonials() {
           opacity: 1,
           y: 0,
           duration: 0.8,
-          delay: i * 0.2,
+          delay: i * 0.15,
           ease: "power3.out",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 82%",
-          },
+          scrollTrigger: { trigger: card, start: "top 82%" },
         }
       );
     });
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-36 px-6 md:px-10 bg-bg-elevated">
+    <section className="py-24 md:py-36 px-6 md:px-10 bg-navy">
       <div className="max-w-7xl mx-auto">
-        <p className="text-label text-accent mb-4">What They Say</p>
-        <h2 className="text-section-heading font-display mb-16 md:mb-20 max-w-3xl">
+        <p className="text-label mb-4" style={{ color: "#C4882A" }}>What They Say</p>
+        <h2 className="text-section-heading font-display text-white mb-16 md:mb-20 max-w-3xl">
           Don&apos;t take our word for it.
         </h2>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {testimonials.map((testimonial, i) => (
+          {testimonials.map((t, i) => (
             <div
               key={i}
               ref={(el) => { cardsRef.current[i] = el; }}
-              className="opacity-0 border border-border rounded-2xl p-8 md:p-10 relative"
+              className="opacity-0 rounded-2xl p-8 md:p-10 relative"
+              style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
             >
-              {/* Quote mark */}
-              <span className="absolute top-6 right-8 text-6xl font-display text-accent/10 leading-none select-none">
+              <span className="absolute top-6 right-8 text-7xl font-display leading-none select-none" style={{ color: "rgba(3,76,178,0.3)" }}>
                 &ldquo;
               </span>
 
-              <p className="text-text text-lg md:text-xl leading-relaxed mb-8 relative z-10">
-                &ldquo;{testimonial.quote}&rdquo;
+              <p className="text-white/80 text-lg md:text-xl leading-relaxed mb-8 relative z-10">
+                &ldquo;{t.quote}&rdquo;
               </p>
 
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
-                  <span className="font-display font-bold text-accent text-lg">
-                    {testimonial.name.charAt(0)}
-                  </span>
+                <div className="w-12 h-12 rounded-full flex items-center justify-center font-display font-bold text-lg" style={{ background: "rgba(3,76,178,0.3)", color: "#6B9FE4" }}>
+                  {t.name.charAt(0)}
                 </div>
                 <div>
-                  <p className="font-display font-semibold text-text">
-                    {testimonial.name}
-                  </p>
-                  <p className="text-text-muted text-sm">{testimonial.role}</p>
+                  <p className="font-display font-semibold text-white">{t.name}</p>
+                  <p className="text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>{t.role}</p>
                 </div>
               </div>
             </div>

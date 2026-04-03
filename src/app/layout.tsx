@@ -15,13 +15,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "EDEV — Custom Software for Local Businesses",
+  title: "Elma Digital — Custom Software & Web Design in Elma, WA",
   description:
-    "We help busy business owners replace complicated workflows with modern custom software. Save time, reduce stress, and get back to doing what you love.",
+    "Elma Digital helps Grays Harbor business owners get off spreadsheets, show up online, and run their operations with software built around how they actually work.",
   openGraph: {
-    title: "EDEV — Custom Software for Local Businesses",
+    title: "Elma Digital — Custom Software & Web Design in Elma, WA",
     description:
-      "We help busy business owners replace complicated workflows with modern custom software.",
+      "Custom software, web design, and logo design for local businesses in Grays Harbor County, Washington.",
     type: "website",
   },
 };

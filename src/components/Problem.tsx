@@ -8,53 +8,48 @@ gsap.registerPlugin(ScrollTrigger);
 
 const problems = [
   {
-    title: "Drowning in spreadsheets",
+    title: "Buried in manual work",
     description:
-      "Hours every week manually tracking employees, invoices, inventory — copying numbers from one place to another.",
+      "Hours every week copying numbers between spreadsheets, chasing down hours, manually building invoices. Time you should be spending on the work you're actually good at.",
   },
   {
-    title: "Locked into expensive software",
+    title: "Software that doesn't fit",
     description:
-      "Paying tens of thousands for tools that don't fit your workflow, lock your data in proprietary formats, and charge you to access it.",
+      "Off-the-shelf tools built for somebody else's business. You end up working around the software instead of the other way around — and paying for it every month.",
   },
   {
     title: "No time for what matters",
     description:
-      "The business you built to do what you love has become a full-time admin job. Evenings, weekends — consumed by management.",
+      "You started your business to do something you're proud of. Not to spend Sunday nights catching up on paperwork.",
   },
 ];
 
 export default function Problem() {
-  const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     cardsRef.current.forEach((card, i) => {
       if (!card) return;
-
       gsap.fromTo(
         card,
-        { opacity: 0, y: 50 },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          delay: i * 0.15,
+          duration: 0.7,
+          delay: i * 0.12,
           ease: "power3.out",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 85%",
-          },
+          scrollTrigger: { trigger: card, start: "top 85%" },
         }
       );
     });
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-36 px-6 md:px-10">
+    <section className="py-24 md:py-36 px-6 md:px-10 bg-bg">
       <div className="max-w-7xl mx-auto">
-        <p className="text-label text-accent mb-4">The Problem</p>
-        <h2 className="text-section-heading font-display mb-16 md:mb-20 max-w-3xl">
+        <p className="text-label text-amber mb-4">Sound Familiar?</p>
+        <h2 className="text-section-heading font-display text-navy mb-16 md:mb-20 max-w-3xl">
           Running a business shouldn&apos;t feel like a second job.
         </h2>
 
@@ -65,10 +60,10 @@ export default function Problem() {
               ref={(el) => { cardsRef.current[i] = el; }}
               className="process-card opacity-0"
             >
-              <span className="text-accent font-display text-sm font-medium mb-4 block">
+              <span className="font-display text-blue text-sm font-semibold mb-4 block">
                 0{i + 1}
               </span>
-              <h3 className="font-display text-xl md:text-2xl font-semibold mb-4 text-text">
+              <h3 className="font-display text-xl md:text-2xl font-semibold mb-4 text-navy">
                 {problem.title}
               </h3>
               <p className="text-text-muted text-base leading-relaxed">
