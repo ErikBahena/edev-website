@@ -22,7 +22,7 @@ export default function Home() {
       <MobileCallButton />
       <Navigation />
 
-      <main>
+      <main className="pb-[72px] md:pb-0">
         <Hero />
         <TrustBar />
         <Services />

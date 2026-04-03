@@ -106,7 +106,7 @@ export default function Services() {
 
               {/* Expanded panel */}
               <div className={`overflow-hidden transition-all duration-500 ease-in-out ${open === i ? "max-h-[36rem] opacity-100" : "max-h-0 opacity-0"}`}>
-                <div className="pb-12 pl-12 md:pl-[3.75rem]">
+                <div className="pb-12 md:pl-[3.75rem]">
 
                   {/* Description */}
                   <p className="text-body-lg text-text-muted leading-relaxed max-w-2xl mb-10">
