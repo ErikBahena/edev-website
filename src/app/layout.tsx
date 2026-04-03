@@ -15,14 +15,58 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Elma Digital — Custom Software & Web Design in Elma, WA",
+  title: "Elma Digital — Logos, Websites & Custom Software in Elma, WA",
   description:
-    "Elma Digital helps Grays Harbor business owners get off spreadsheets, show up online, and run their operations with software built around how they actually work.",
+    "Elma Digital serves Grays Harbor businesses with logo design, flyer design, website design, and custom software. Locally owned in Elma, WA. Call (360) 843-5566.",
   openGraph: {
-    title: "Elma Digital — Custom Software & Web Design in Elma, WA",
+    title: "Elma Digital — Logos, Websites & Custom Software in Elma, WA",
     description:
-      "Custom software, web design, and logo design for local businesses in Grays Harbor County, Washington.",
+      "Logo design from $50. Websites from $750. Custom software for local businesses. Serving Grays Harbor County, WA.",
     type: "website",
+  },
+};
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Elma Digital",
+  description:
+    "Logo design, flyer design, website design, and custom software for local businesses in Grays Harbor County, Washington.",
+  url: "https://elmadigital.io",
+  telephone: "+13608435566",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Elma",
+    addressRegion: "WA",
+    postalCode: "98541",
+    addressCountry: "US",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 46.9975,
+    longitude: -123.4091,
+  },
+  areaServed: [
+    "Elma", "Aberdeen", "Hoquiam", "Montesano", "McCleary",
+    "Ocean Shores", "Westport", "Cosmopolis", "Grays Harbor County",
+  ],
+  priceRange: "$–$$$",
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "09:00",
+    closes: "17:00",
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Digital Services",
+    itemListElement: [
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Logo Design" }, price: "50", priceCurrency: "USD" },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Flyer & Print Design" }, price: "25", priceCurrency: "USD" },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Single-Page Website" }, price: "750", priceCurrency: "USD" },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Multi-Page Website" }, price: "1500", priceCurrency: "USD" },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Custom Software Development" } },
+    ],
   },
 };
 
@@ -36,6 +80,12 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${inter.variable} antialiased`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );
