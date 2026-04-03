@@ -22,18 +22,20 @@ export default function Navigation() {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${visible ? "translate-y-0" : "-translate-y-full"}`}>
-      <div className={`absolute bottom-0 left-0 right-0 h-px transition-opacity duration-300 ${scrolled ? "opacity-100" : "opacity-0"}`}
-        style={{ background: scrolled ? "var(--border)" : "rgba(255,255,255,0.1)" }} />
+    <nav className={`fixed top-0 left-0 right-0 z-[100] transition-transform duration-300 ${visible ? "translate-y-0" : "-translate-y-full"}`}>
+      {/* Persistent white bg layer — opacity transitions in, no backdrop-blur flash */}
+      <div className="absolute inset-0 bg-white backdrop-blur-xl pointer-events-none transition-opacity duration-300"
+        style={{ opacity: scrolled ? 0.97 : 0 }} />
+      {/* Bottom border */}
+      <div className="absolute bottom-0 left-0 right-0 h-px pointer-events-none transition-opacity duration-300"
+        style={{ background: "var(--border)", opacity: scrolled ? 1 : 0 }} />
 
-      <div className={`px-6 md:px-14 h-16 md:h-18 flex items-center justify-between transition-all duration-300 ${
-        scrolled ? "bg-white/98 backdrop-blur-xl shadow-sm" : "bg-transparent"
-      }`}>
+      <div className="relative px-6 md:px-14 h-16 md:h-18 flex items-center justify-between">
 
         {/* Wordmark */}
         <a href="#" className="font-display text-xl md:text-2xl font-bold tracking-tight flex items-center gap-0.5">
           <span className="text-blue">Elma</span>
-          <span className={scrolled ? "text-navy" : "text-white"}>Digital</span>
+          <span className={`transition-colors duration-300 ${scrolled ? "text-navy" : "text-white"}`}>Digital</span>
         </a>
 
         {/* Center — location (desktop) */}
@@ -54,9 +56,7 @@ export default function Navigation() {
             }`}>
             {PHONE_DISPLAY}
           </a>
-          <a href="#contact" className={`btn-primary text-sm px-5 md:px-7 py-2.5 md:py-3 ${
-            scrolled ? "" : ""
-          }`}>
+          <a href="#contact" className="btn-primary text-sm px-5 md:px-7 py-2.5 md:py-3">
             Free Consultation
           </a>
         </div>
