@@ -10,7 +10,6 @@ import Process from "@/components/Process";
 import CaseStudies from "@/components/CaseStudies";
 import About from "@/components/About";
 import Testimonials from "@/components/Testimonials";
-import ServiceArea from "@/components/ServiceArea";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 
@@ -31,7 +30,6 @@ export default function Home() {
         <CaseStudies />
         <About />
         <Testimonials />
-        <ServiceArea />
         <CTA />
       </main>
 
