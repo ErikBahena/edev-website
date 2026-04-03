@@ -124,7 +124,7 @@ export default function Services() {
                   </div>
 
                   {/* CTAs */}
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-3 justify-end">
                     <a
                       href={`sms:${PHONE}?body=${encodeURIComponent(s.smsBody)}`}
                       className="btn-primary px-7 py-3 text-sm flex items-center gap-2"
