@@ -7,68 +7,90 @@ const PHONE = "3608435566";
 const PHONE_DISPLAY = "(360) 843-5566";
 
 export default function Hero() {
-  const headlineRef = useRef<HTMLHeadingElement>(null);
-  const subRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const badgeRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const tl = gsap.timeline({ delay: 0.15 });
-    tl.fromTo(badgeRef.current, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" })
-      .fromTo(
-        headlineRef.current?.querySelectorAll(".word") ?? [],
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 0.75, stagger: 0.06, ease: "power3.out" },
-        "-=0.2"
-      )
-      .fromTo(subRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.3")
-      .fromTo(ctaRef.current, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, "-=0.25");
+    if (!containerRef.current) return;
+    const tl = gsap.timeline({ delay: 0.1 });
+
+    tl.fromTo(".hero-label", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" })
+      .fromTo(".hero-line", { opacity: 0, y: 60, skewY: 1 },
+        { opacity: 1, y: 0, skewY: 0, duration: 0.8, stagger: 0.1, ease: "power3.out" }, "-=0.2")
+      .fromTo(".hero-sub", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.3")
+      .fromTo(".hero-cta", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, "-=0.2")
+      .fromTo(".hero-services", { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power2.out" }, "-=0.4");
   }, []);
 
-  const words = "Elma's digital partner for every size business.".split(" ");
-
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 md:px-10 pt-24 md:pt-0 text-center overflow-hidden bg-navy">
-      {/* Grid pattern */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.04]"
-        style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)", backgroundSize: "60px 60px" }}
-      />
-      {/* Glow */}
-      <div className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 70% 50% at 50% 40%, rgba(3,76,178,0.22) 0%, transparent 70%)" }}
-      />
+    <section ref={containerRef} className="relative min-h-screen flex flex-col justify-end pb-16 md:pb-20 px-6 md:px-14 pt-28 overflow-hidden bg-navy">
+      {/* Grid */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.035]"
+        style={{ backgroundImage: "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
+      {/* Radial blue glow */}
+      <div className="absolute top-0 right-0 w-[70%] h-[70%] pointer-events-none"
+        style={{ background: "radial-gradient(ellipse at top right, rgba(3,76,178,0.18) 0%, transparent 65%)" }} />
 
-      <div className="relative z-10 max-w-4xl mx-auto">
-        {/* Location badge */}
-        <div ref={badgeRef} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 mb-6 opacity-0">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber inline-block" />
-          <span className="text-label text-white/50">Locally owned · Elma, WA · Grays Harbor County</span>
-        </div>
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto w-full">
+        <div className="grid md:grid-cols-[1fr_auto] gap-8 md:gap-16 items-end">
+          {/* Left — headline */}
+          <div>
+            <p className="hero-label text-label mb-8 opacity-0" style={{ color: "rgba(255,255,255,0.35)" }}>
+              Elma, WA &nbsp;·&nbsp; Grays Harbor County &nbsp;·&nbsp; Locally Owned
+            </p>
 
-        <h1 ref={headlineRef} className="text-hero font-display text-white mb-6">
-          {words.map((word, i) => (
-            <span key={i} className="word inline-block mr-[0.22em]">{word}</span>
-          ))}
-        </h1>
+            <div className="overflow-hidden mb-2">
+              <h1 className="hero-line text-display font-display text-white opacity-0">
+                Your business,
+              </h1>
+            </div>
+            <div className="overflow-hidden mb-2">
+              <h1 className="hero-line text-display font-display opacity-0" style={{ color: "var(--blue)", WebkitTextStroke: "2px var(--blue)", WebkitTextFillColor: "transparent" }}>
+                online &amp;
+              </h1>
+            </div>
+            <div className="overflow-hidden mb-10">
+              <h1 className="hero-line text-display font-display text-white opacity-0">
+                running better.
+              </h1>
+            </div>
 
-        <p ref={subRef} className="text-body-lg max-w-xl mx-auto mb-10 opacity-0" style={{ color: "rgba(255,255,255,0.6)" }}>
-          Logos from $50. Websites from $750. Custom software for when your business outgrows spreadsheets.
-        </p>
+            <p className="hero-sub text-body-lg max-w-md mb-10 opacity-0" style={{ color: "rgba(255,255,255,0.5)" }}>
+              Logos, websites, and custom software for local businesses in Grays Harbor County.
+            </p>
 
-        <div ref={ctaRef} className="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0">
-          <a href="#contact" className="btn-primary text-base px-8 py-4">
-            Get a Free Consultation
-          </a>
-          <a href={`tel:${PHONE}`} className="btn-outline text-base px-8 py-4">
-            Call {PHONE_DISPLAY}
-          </a>
+            <div className="hero-cta flex flex-wrap gap-3 opacity-0">
+              <a href="#contact" className="btn-primary px-8 py-4 text-sm">
+                Free Consultation
+              </a>
+              <a href={`tel:${PHONE}`} className="btn-ghost px-8 py-4 text-sm">
+                {PHONE_DISPLAY}
+              </a>
+            </div>
+          </div>
+
+          {/* Right — service list (decorative) */}
+          <div className="hero-services opacity-0 hidden md:block">
+            <div className="space-y-3 text-right">
+              {[
+                { n: "01", label: "Logo Design", price: "from $50" },
+                { n: "02", label: "Website Design", price: "from $750" },
+                { n: "03", label: "Custom Software", price: "Let's talk" },
+              ].map((s) => (
+                <a href="#services" key={s.n}
+                  className="flex items-baseline justify-end gap-4 group transition-all duration-200">
+                  <span className="text-label opacity-30 text-white group-hover:opacity-60 transition-opacity">{s.n}</span>
+                  <span className="font-display font-semibold text-lg text-white/70 group-hover:text-white transition-colors">{s.label}</span>
+                  <span className="font-display text-sm font-medium text-amber w-24 text-right">{s.price}</span>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-25">
-        <div className="w-px h-10 bg-gradient-to-b from-white to-transparent" />
-      </div>
+      {/* Bottom rule */}
+      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: "rgba(255,255,255,0.08)" }} />
     </section>
   );
 }

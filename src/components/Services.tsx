@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -8,135 +8,125 @@ gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
-    icon: (
-      <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10">
-        <rect x="4" y="4" width="32" height="32" rx="8" stroke="#034CB2" strokeWidth="1.5" opacity="0.3"/>
-        <path d="M20 12C20 12 14 16 14 21C14 24.314 16.686 27 20 27C23.314 27 26 24.314 26 21C26 16 20 12 20 12Z" stroke="#034CB2" strokeWidth="1.5" strokeLinejoin="round"/>
-        <path d="M20 27V32" stroke="#034CB2" strokeWidth="1.5" strokeLinecap="round"/>
-        <path d="M17 32H23" stroke="#034CB2" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    ),
-    label: "Design",
+    n: "01",
     title: "Logo & Print Design",
-    description:
-      "A logo that makes your business look like it means business. Flyers, menus, business cards — everything that puts your name in front of customers.",
+    description: "A logo that makes your business look like it takes itself seriously. Flyers, menus, business cards — everything that puts your name in front of customers. Fast turnaround, flat pricing, no surprises.",
     pricing: [
       { name: "Logo Design", price: "from $50" },
       { name: "Flyer / Print Design", price: "from $25" },
+      { name: "Business Cards", price: "from $25" },
     ],
-    cta: "Get a logo",
   },
   {
-    icon: (
-      <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10">
-        <rect x="4" y="8" width="32" height="24" rx="3" stroke="#034CB2" strokeWidth="1.5" opacity="0.3"/>
-        <path d="M4 14H36" stroke="#034CB2" strokeWidth="1.5"/>
-        <circle cx="9" cy="11" r="1.5" fill="#034CB2" opacity="0.5"/>
-        <circle cx="14" cy="11" r="1.5" fill="#034CB2" opacity="0.5"/>
-        <path d="M12 22L16 26L28 18" stroke="#034CB2" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
-    label: "Web",
+    n: "02",
     title: "Website Design",
-    description:
-      "A real website that gets your business found on Google. Not a template — built for your business, with a CMS so you can update it yourself.",
+    description: "A real website built for your business — not a $20/month template someone else's customers are also using. We build it, we add a CMS so you can update it yourself, and we make sure Google can actually find you.",
     pricing: [
       { name: "Single-page + CMS", price: "from $750" },
       { name: "Multi-page + CMS", price: "from $1,500" },
+      { name: "Monthly maintenance", price: "ask us" },
     ],
-    cta: "Get a website",
   },
   {
-    icon: (
-      <svg viewBox="0 0 40 40" fill="none" className="w-10 h-10">
-        <rect x="4" y="4" width="32" height="32" rx="4" stroke="#034CB2" strokeWidth="1.5" opacity="0.3"/>
-        <path d="M14 20H26M20 14V26" stroke="#034CB2" strokeWidth="1.5" strokeLinecap="round"/>
-        <rect x="10" y="10" width="8" height="6" rx="1.5" stroke="#034CB2" strokeWidth="1.5"/>
-        <rect x="22" y="24" width="8" height="6" rx="1.5" stroke="#034CB2" strokeWidth="1.5"/>
-      </svg>
-    ),
-    label: "Software",
+    n: "03",
     title: "Custom Software",
-    description:
-      "When your business has outgrown spreadsheets and generic software. We watch how you work, then build something that fits — employee tracking, invoicing, reporting, whatever you need.",
+    description: "When your business has outgrown spreadsheets and generic tools. We sit with you, learn how your operation actually works, and build software that fits — employee tracking, invoicing, inventory, reporting, whatever the bottleneck is. Priced on the value we save you, not the hours we work.",
     pricing: [
-      { name: "Priced on value saved", price: "Let's talk" },
+      { name: "Discovery call", price: "free" },
+      { name: "Custom build", price: "from $5,000" },
+      { name: "Monthly support", price: "from $200/mo" },
     ],
-    cta: "Book a call",
     featured: true,
   },
 ];
 
 export default function Services() {
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const [open, setOpen] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    cardsRef.current.forEach((card, i) => {
-      if (!card) return;
-      gsap.fromTo(
-        card,
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 0.7, delay: i * 0.1, ease: "power3.out",
-          scrollTrigger: { trigger: card, start: "top 85%" } }
-      );
+    rowRefs.current.forEach((row, i) => {
+      if (!row) return;
+      gsap.fromTo(row, { opacity: 0, x: -30 },
+        { opacity: 1, x: 0, duration: 0.6, delay: i * 0.1, ease: "power3.out",
+          scrollTrigger: { trigger: row, start: "top 88%" } });
     });
   }, []);
 
+  const toggle = (i: number) => setOpen(open === i ? null : i);
+
   return (
-    <section id="services" className="py-24 md:py-36 px-6 md:px-10 bg-bg">
+    <section id="services" ref={sectionRef} className="py-24 md:py-36 px-6 md:px-14 bg-bg">
       <div className="max-w-7xl mx-auto">
-        <p className="text-label text-amber mb-4">What We Do</p>
-        <h2 className="text-section-heading font-display text-navy mb-4 max-w-3xl">
-          Everything your business needs to show up and run better.
-        </h2>
-        <p className="text-body-lg text-text-muted mb-16 md:mb-20 max-w-2xl">
-          Start small or go big — we work with businesses at every stage.
-        </p>
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+          <div>
+            <p className="text-label text-amber mb-4">What We Do</p>
+            <h2 className="text-heading font-display text-navy">
+              Every digital need,<br />one local team.
+            </h2>
+          </div>
+          <p className="text-body-lg text-text-muted max-w-xs md:text-right">
+            Start with a logo. End up with software that runs your whole operation.
+          </p>
+        </div>
 
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-          {services.map((service, i) => (
-            <div
-              key={i}
-              ref={(el) => { cardsRef.current[i] = el; }}
-              className={`opacity-0 rounded-xl p-8 flex flex-col border transition-all duration-300 hover:-translate-y-1 ${
-                service.featured
-                  ? "bg-navy border-blue/30 hover:border-blue/60"
-                  : "bg-white border-border hover:border-blue/40 hover:shadow-lg"
-              }`}
-            >
-              <div className="mb-5">{service.icon}</div>
-              <span className={`text-label mb-2 ${service.featured ? "text-amber" : "text-amber"}`}>
-                {service.label}
-              </span>
-              <h3 className={`font-display text-xl md:text-2xl font-semibold mb-3 ${service.featured ? "text-white" : "text-navy"}`}>
-                {service.title}
-              </h3>
-              <p className={`text-sm leading-relaxed mb-6 flex-1 ${service.featured ? "text-white/60" : "text-text-muted"}`}>
-                {service.description}
-              </p>
-
-              {/* Pricing */}
-              <div className={`rounded-lg p-4 mb-6 ${service.featured ? "bg-white/5 border border-white/10" : "bg-bg-elevated border border-border"}`}>
-                {service.pricing.map((tier, j) => (
-                  <div key={j} className={`flex items-center justify-between ${j > 0 ? "mt-2 pt-2 border-t " + (service.featured ? "border-white/10" : "border-border") : ""}`}>
-                    <span className={`text-sm ${service.featured ? "text-white/60" : "text-text-muted"}`}>{tier.name}</span>
-                    <span className={`text-sm font-semibold font-display ${service.featured ? "text-white" : "text-navy"}`}>{tier.price}</span>
-                  </div>
-                ))}
-              </div>
-
-              <a
-                href="#contact"
-                className={`text-center text-sm font-semibold font-display py-3 px-6 rounded-full transition-all duration-200 ${
-                  service.featured
-                    ? "bg-blue text-white hover:bg-blue-dark"
-                    : "bg-navy text-white hover:bg-navy/80"
-                }`}
+        {/* Service rows */}
+        <div>
+          {services.map((s, i) => (
+            <div key={i} ref={(el) => { rowRefs.current[i] = el; }} className="opacity-0">
+              {/* Row */}
+              <button
+                onClick={() => toggle(i)}
+                className="w-full border-t border-border py-7 flex items-center gap-6 md:gap-10 text-left group"
+                style={{ borderColor: open === i ? "var(--border-strong)" : "" }}
               >
-                {service.cta} →
-              </a>
+                {/* Number */}
+                <span className="font-display text-xs font-semibold text-text-muted w-6 flex-shrink-0 group-hover:text-navy transition-colors">
+                  {s.n}
+                </span>
+
+                {/* Title */}
+                <span className={`text-service font-display flex-1 transition-colors duration-200 ${open === i ? "text-blue" : "text-navy group-hover:text-blue"}`}>
+                  {s.title}
+                </span>
+
+                {/* Price range */}
+                <span className="font-display font-medium text-sm text-amber hidden md:block flex-shrink-0">
+                  {s.pricing[0].price}
+                </span>
+
+                {/* Arrow */}
+                <span className={`flex-shrink-0 w-8 h-8 rounded-full border border-border flex items-center justify-center transition-all duration-300 group-hover:border-navy ${open === i ? "bg-navy border-navy rotate-45" : ""}`}>
+                  <svg className={`w-3.5 h-3.5 transition-colors ${open === i ? "text-white" : "text-text-muted group-hover:text-navy"}`} viewBox="0 0 14 14" fill="none">
+                    <path d="M7 1V13M1 7H13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
+                </span>
+              </button>
+
+              {/* Expanded */}
+              <div className={`overflow-hidden transition-all duration-500 ease-in-out ${open === i ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
+                <div className="pb-8 pl-12 md:pl-16 grid md:grid-cols-[1fr_auto] gap-8 items-start">
+                  <p className="text-body-lg text-text-muted max-w-xl leading-relaxed">
+                    {s.description}
+                  </p>
+                  <div className="bg-bg-warm rounded-lg p-5 min-w-[220px]">
+                    {s.pricing.map((tier, j) => (
+                      <div key={j} className={`flex justify-between items-baseline gap-6 ${j > 0 ? "mt-3 pt-3 border-t border-border" : ""}`}>
+                        <span className="text-sm text-text-muted">{tier.name}</span>
+                        <span className="font-display font-semibold text-sm text-navy whitespace-nowrap">{tier.price}</span>
+                      </div>
+                    ))}
+                    <a href="#contact" className="mt-5 block text-center btn-primary py-2.5 text-sm">
+                      Get started →
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           ))}
+          <div className="border-t border-border" />
         </div>
       </div>
     </section>
