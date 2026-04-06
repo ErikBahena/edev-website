@@ -1,5 +1,4 @@
 import GrainOverlay from "@/components/GrainOverlay";
-import CustomCursor from "@/components/CustomCursor";
 import SmoothScroll from "@/components/SmoothScroll";
 import MobileCallButton from "@/components/MobileCallButton";
 import Navigation from "@/components/Navigation";
@@ -17,7 +16,6 @@ export default function Home() {
   return (
     <>
       <GrainOverlay />
-      <CustomCursor />
       <SmoothScroll />
       <MobileCallButton />
       <Navigation />

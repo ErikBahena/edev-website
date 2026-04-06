@@ -37,8 +37,7 @@
 
 /* ─── Reset ─── */
 
-* { cursor: none !important; box-sizing: border-box; }
-@media (max-width: 768px) { * { cursor: auto !important; } }
+* { box-sizing: border-box; }
 
 html { background: var(--bg); color: var(--text); scroll-behavior: auto; }
 body { background: var(--bg); font-family: var(--font-inter), system-ui, sans-serif; overflow-x: hidden; }
@@ -95,20 +94,6 @@ html.lenis, html.lenis body { height: auto; }
   font-size: 0.68rem; letter-spacing: 0.2em;
   text-transform: uppercase; font-weight: 600;
 }
-
-/* ─── Cursor ─── */
-.cursor-dot {
-  width: 6px; height: 6px; background: var(--blue); border-radius: 50%;
-  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999;
-  transition: transform 0.15s ease, background 0.2s ease, width 0.2s ease, height 0.2s ease;
-}
-.cursor-ring {
-  width: 32px; height: 32px; border: 1px solid var(--blue); border-radius: 50%;
-  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99998; opacity: 0.35;
-  transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease, border-color 0.25s ease;
-}
-.cursor-dot.hovering { background: var(--amber); width: 10px; height: 10px; }
-.cursor-ring.hovering { width: 48px; height: 48px; border-color: var(--amber); opacity: 0.25; }
 
 /* ─── Buttons ─── */
 .btn-primary {
