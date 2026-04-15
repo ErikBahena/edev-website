@@ -7,8 +7,8 @@ import TrustBar from "@/components/TrustBar";
 import Services from "@/components/Services";
 import Process from "@/components/Process";
 import CaseStudies from "@/components/CaseStudies";
-import About from "@/components/About";
 import Testimonials from "@/components/Testimonials";
+import About from "@/components/About";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 
@@ -26,8 +26,9 @@ export default function Home() {
         <Services />
         <Process />
         <CaseStudies />
-        <About />
         <Testimonials />
+        <About />
+
         <CTA />
       </main>
 

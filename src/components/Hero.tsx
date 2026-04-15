@@ -40,17 +40,17 @@ export default function Hero() {
             </p>
 
             <div className="overflow-hidden mb-2">
-              <h1 className="hero-line text-display font-display text-white opacity-0">
+              <h1 className="hero-line text-display font-display text-white opacity-0 pb-3">
                 Your business,
               </h1>
             </div>
             <div className="overflow-hidden mb-2">
-              <h1 className="hero-line text-display font-display opacity-0" style={{ color: "var(--blue)", WebkitTextStroke: "2px var(--blue)", WebkitTextFillColor: "transparent" }}>
+              <h1 className="hero-line text-display font-display opacity-0 pb-3" style={{ color: "var(--blue)", WebkitTextStroke: "2px var(--blue)", WebkitTextFillColor: "transparent" }}>
                 online &amp;
               </h1>
             </div>
             <div className="overflow-hidden mb-10">
-              <h1 className="hero-line text-display font-display text-white opacity-0">
+              <h1 className="hero-line text-display font-display text-white opacity-0 pb-3">
                 running better.
               </h1>
             </div>

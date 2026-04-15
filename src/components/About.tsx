@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -8,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
   { value: "2", label: "businesses built" },
-  { value: "$75K+", label: "in costs replaced" },
+  { value: "$100K+", label: "in costs replaced" },
   { value: "240+", label: "hours saved / yr" },
   { value: "0", label: "outsourced" },
 ];
@@ -29,12 +30,49 @@ export default function About() {
     <section ref={sectionRef} className="py-24 md:py-36 px-6 md:px-14 bg-bg-warm">
       <div className="max-w-7xl mx-auto">
 
-        {/* Quote */}
+        {/* Quote + photo */}
         <div className="mb-16 about-reveal opacity-0">
           <p className="text-label text-amber mb-8">Who&apos;s Behind This</p>
-          <blockquote className="text-heading font-display text-navy max-w-4xl">
-            &ldquo;I&apos;m a software engineer from Elma. I started this because I know what local business owners are up against.&rdquo;
-          </blockquote>
+          <div className="grid md:grid-cols-[1fr_auto] gap-10 md:gap-14 items-center">
+            <blockquote className="text-heading font-display text-navy max-w-3xl">
+              &ldquo;I&apos;m a software engineer from Elma. I started this
+              because I know what local business owners are up
+              against.&rdquo;
+            </blockquote>
+            <div className="flex-shrink-0 relative">
+              {/* Decorative ring */}
+              <div
+                className="absolute rounded-full pointer-events-none hidden md:block"
+                style={{
+                  width: "clamp(280px, 22vw, 360px)",
+                  height: "clamp(280px, 22vw, 360px)",
+                  border: "2px solid var(--amber)",
+                  opacity: 0.15,
+                  top: "-28px",
+                  right: "-32px",
+                }}
+              />
+              <div
+                className="rounded-2xl overflow-hidden relative z-10"
+                style={{
+                  width: "clamp(180px, 16vw, 260px)",
+                  aspectRatio: "3 / 4",
+                  boxShadow: "0 8px 30px -8px rgba(0,0,0,0.12)",
+                }}
+              >
+                <Image
+                  src="/erik.jpg"
+                  alt="Erik Bahena, founder of Elma Digital"
+                  fill
+                  className="object-cover object-top"
+                  sizes="320px"
+                  quality={85}
+                />
+              </div>
+              <p className="font-display font-semibold text-navy text-sm mt-4 text-center">Erik Bahena</p>
+              <p className="text-text-muted text-xs text-center">Founder &middot; Elma, WA</p>
+            </div>
+          </div>
         </div>
 
         {/* Rule + two col */}
