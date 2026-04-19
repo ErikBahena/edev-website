@@ -6,6 +6,7 @@ import ChangePasswordForm from "./change-password-form";
 const NAV_LINKS = [
   { href: "/admin", label: "Dashboard" },
   { href: "/admin/clients", label: "Clients" },
+  { href: "/admin/invoices", label: "Invoices" },
 ];
 
 export default async function AdminNav() {

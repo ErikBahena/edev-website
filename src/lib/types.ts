@@ -88,3 +88,46 @@ export type Interaction = {
   notes: string | null;
   created_at: string;
 };
+
+// ─── Invoices ────────────────────────────────────────────────────────────────
+
+export type InvoiceStatus =
+  | "draft"
+  | "open"
+  | "paid"
+  | "uncollectible"
+  | "void";
+
+export const INVOICE_STATUS_LABELS: Record<InvoiceStatus, string> = {
+  draft: "Draft",
+  open: "Sent",
+  paid: "Paid",
+  uncollectible: "Uncollectible",
+  void: "Void",
+};
+
+export type InvoiceLineItem = {
+  description: string;
+  amount_cents: number;
+  quantity: number;
+};
+
+export type Invoice = {
+  id: string;
+  client_id: string;
+  project_id: string | null;
+  stripe_invoice_id: string | null;
+  stripe_hosted_invoice_url: string | null;
+  stripe_invoice_pdf: string | null;
+  description: string | null;
+  line_items: InvoiceLineItem[];
+  amount_total_cents: number;
+  currency: string;
+  status: InvoiceStatus;
+  due_date: string | null;
+  sent_at: string | null;
+  paid_at: string | null;
+  memo: string | null;
+  created_at: string;
+  updated_at: string;
+};
