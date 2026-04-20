@@ -133,12 +133,36 @@ export async function createInvoiceAction(
       daysUntilDue = Math.max(1, Math.ceil(ms / (1000 * 60 * 60 * 24)));
     }
 
+    // Custom fields shown in the header of the invoice. Up to 4 allowed.
+    const customFields: { name: string; value: string }[] = [
+      { name: "Prepared by", value: "Erik Bahena" },
+    ];
+    if (description) {
+      customFields.push({
+        name: "Project",
+        value: description.slice(0, 30),
+      });
+    }
+
+    // Invoice footer shown beneath line items. Visible to the client on
+    // both the hosted page and PDF. Keep this warm and specific.
+    const footer = [
+      "Thank you for your business.",
+      "Payment terms: Net " + daysUntilDue + " days.",
+      "Questions? Reply to this email or text (360) 843-5566.",
+      "Elma Digital · elmadigital.io",
+    ].join("\n");
+
     // Create the Stripe invoice first (empty), then attach items, then finalize.
     const stripeInvoice = await stripe.invoices.create({
       customer: customerId,
       collection_method: "send_invoice",
       days_until_due: daysUntilDue,
       description: description || undefined,
+      footer,
+      custom_fields: customFields,
+      auto_advance: false,
+      pending_invoice_items_behavior: "exclude",
       metadata: { elma_client_id: clientId },
     });
 
