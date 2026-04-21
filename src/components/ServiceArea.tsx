@@ -28,7 +28,7 @@ export default function ServiceArea() {
     <section ref={sectionRef} className="py-16 md:py-24 px-6 md:px-14 bg-bg border-t border-border">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center gap-8 md:gap-16">
         <div className="flex-shrink-0">
-          <p className="text-label text-amber mb-2">Where We Work</p>
+          <p className="text-label text-accent mb-2">Where We Work</p>
           <p className="font-display text-xl font-bold text-navy">Grays Harbor County</p>
         </div>
         <div className="flex flex-wrap gap-2.5">

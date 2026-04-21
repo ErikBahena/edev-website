@@ -14,7 +14,7 @@ export default function NewClientPage() {
 
       <main className="max-w-4xl mx-auto px-6 md:px-10 py-12">
         <div className="mb-10">
-          <p className="text-label text-amber mb-3">Clients</p>
+          <p className="text-label text-accent mb-3">Clients</p>
           <h1 className="text-heading font-display text-navy">New client.</h1>
         </div>
 

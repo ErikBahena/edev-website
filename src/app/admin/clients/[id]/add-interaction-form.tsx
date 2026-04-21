@@ -71,7 +71,7 @@ export default function AddInteractionForm({ clientId }: { clientId: string }) {
 
       <div>
         <label className="block text-xs font-display font-medium text-text-muted mb-2">
-          Summary <span className="text-amber">*</span>
+          Summary <span className="text-accent">*</span>
         </label>
         <input
           type="text"

@@ -48,7 +48,7 @@ export default function Problem() {
   return (
     <section className="py-24 md:py-36 px-6 md:px-10 bg-bg">
       <div className="max-w-7xl mx-auto">
-        <p className="text-label text-amber mb-4">Sound Familiar?</p>
+        <p className="text-label text-accent mb-4">Sound Familiar?</p>
         <h2 className="text-section-heading font-display text-navy mb-16 md:mb-20 max-w-3xl">
           Running a business shouldn&apos;t feel like a second job.
         </h2>

@@ -29,7 +29,7 @@ export default async function ClientsListPage() {
       <main className="max-w-7xl mx-auto px-6 md:px-10 py-12">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <p className="text-label text-amber mb-3">Clients</p>
+            <p className="text-label text-accent mb-3">Clients</p>
             <h1 className="text-heading font-display text-navy">All clients.</h1>
           </div>
           <Link
@@ -58,7 +58,7 @@ export default async function ClientsListPage() {
         ) : (
           <div className="bg-white rounded-2xl border border-border overflow-hidden">
             {/* Header row */}
-            <div className="hidden md:grid grid-cols-[2fr_2fr_1fr_1.5fr_1fr_auto] gap-4 px-6 py-4 border-b border-border text-label text-amber font-medium">
+            <div className="hidden md:grid grid-cols-[2fr_2fr_1fr_1.5fr_1fr_auto] gap-4 px-6 py-4 border-b border-border text-label text-accent font-medium">
               <span>Client</span>
               <span>Business</span>
               <span>Status</span>

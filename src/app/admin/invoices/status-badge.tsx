@@ -5,7 +5,7 @@ import {
 
 const STYLES: Record<InvoiceStatus, { bg: string; color: string }> = {
   draft: { bg: "rgba(107,114,128,0.15)", color: "#4b5563" },
-  open: { bg: "rgba(196,136,42,0.12)", color: "#C4882A" },
+  open: { bg: "rgba(var(--accent-rgb),0.12)", color: "var(--accent)" },
   paid: { bg: "rgba(10,125,59,0.12)", color: "#0a7d3b" },
   uncollectible: { bg: "rgba(194,48,48,0.12)", color: "#c23030" },
   void: { bg: "rgba(107,114,128,0.10)", color: "#9ca3af" },

@@ -57,7 +57,7 @@ export default function Hero() {
         className="absolute top-0 right-0 w-[70%] h-[70%] pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at top right, rgba(3,76,178,0.18) 0%, transparent 65%)",
+            "radial-gradient(ellipse at top right, rgba(var(--blue-rgb),0.18) 0%, transparent 65%)",
         }}
       />
 
@@ -142,12 +142,12 @@ export default function Hero() {
               className="hero-showcase opacity-0 relative w-[460px] lg:w-[540px]"
               style={{ height: "clamp(340px, 36vh, 420px)" }}
             >
-              {/* Amber ambient glow behind */}
+              {/* Accent ambient glow behind */}
               <div
                 className="absolute inset-0 -z-10 blur-3xl pointer-events-none"
                 style={{
                   background:
-                    "radial-gradient(circle at 50% 50%, rgba(196,136,42,0.22) 0%, transparent 70%)",
+                    "radial-gradient(circle at 50% 50%, rgba(var(--accent-rgb),0.22) 0%, transparent 70%)",
                 }}
               />
 
@@ -230,7 +230,7 @@ export default function Hero() {
                     <span className="font-display font-semibold text-lg text-white/70 group-hover:text-white transition-colors">
                       {s.label}
                     </span>
-                    <span className="font-display text-sm font-medium text-amber w-24 text-right">
+                    <span className="font-display text-sm font-medium text-accent w-24 text-right">
                       {s.price}
                     </span>
                   </a>

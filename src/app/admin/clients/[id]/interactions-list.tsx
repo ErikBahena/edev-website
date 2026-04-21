@@ -13,11 +13,11 @@ import {
 } from "../actions";
 
 const TYPE_STYLES: Record<InteractionType, { bg: string; color: string }> = {
-  call: { bg: "rgba(3,76,178,0.10)", color: "#034CB2" },
-  email: { bg: "rgba(196,136,42,0.12)", color: "#C4882A" },
+  call: { bg: "rgba(var(--blue-rgb),0.10)", color: "var(--blue)" },
+  email: { bg: "rgba(var(--accent-rgb),0.12)", color: "var(--accent)" },
   meeting: { bg: "rgba(10,125,59,0.12)", color: "#0a7d3b" },
   text: { bg: "rgba(107,114,128,0.15)", color: "#4b5563" },
-  work: { bg: "rgba(13,27,62,0.08)", color: "#0D1B3E" },
+  work: { bg: "rgba(var(--navy-rgb),0.08)", color: "var(--navy)" },
   note: { bg: "rgba(107,114,128,0.10)", color: "#6b7280" },
 };
 
@@ -214,7 +214,7 @@ function InteractionEditForm({
 
         <div>
           <label className="block text-xs font-display font-medium text-text-muted mb-2">
-            Summary <span className="text-amber">*</span>
+            Summary <span className="text-accent">*</span>
           </label>
           <input
             type="text"

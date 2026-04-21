@@ -66,7 +66,7 @@ export default function Services() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12 pb-10 border-b border-border">
           <div>
-            <p className="text-label text-amber mb-3">What We Do</p>
+            <p className="text-label text-accent mb-3">What We Do</p>
             <h2 className="text-heading font-display text-navy">
               Every digital need,<br />one local team.
             </h2>
@@ -94,7 +94,7 @@ export default function Services() {
                 <span className={`text-heading font-display flex-1 leading-[1.05] transition-colors duration-200 ${open === i ? "text-blue" : "text-navy group-hover:text-blue"}`}>
                   {s.title}
                 </span>
-                <span className="font-display font-semibold text-base text-amber hidden md:block flex-shrink-0">
+                <span className="font-display font-semibold text-base text-accent hidden md:block flex-shrink-0">
                   {s.pricing[0].price}
                 </span>
                 <span className={`flex-shrink-0 w-9 h-9 rounded-full border border-border flex items-center justify-center transition-all duration-300 group-hover:border-navy ${open === i ? "bg-navy border-navy rotate-45" : ""}`}>

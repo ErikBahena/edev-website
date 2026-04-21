@@ -55,7 +55,7 @@ export default async function AdminHomePage() {
 
       <main className="max-w-7xl mx-auto px-6 md:px-10 py-12">
         <div className="mb-12">
-          <p className="text-label text-amber mb-3">Overview</p>
+          <p className="text-label text-accent mb-3">Overview</p>
           <h1 className="text-heading font-display text-navy">Dashboard.</h1>
         </div>
 
@@ -106,7 +106,7 @@ export default async function AdminHomePage() {
 function StatCard({ label, value }: { label: string; value: number }) {
   return (
     <div className="bg-white rounded-2xl p-8 border border-border">
-      <p className="text-label text-amber mb-4">{label}</p>
+      <p className="text-label text-accent mb-4">{label}</p>
       <p className="font-display font-bold text-navy text-5xl">{value}</p>
     </div>
   );

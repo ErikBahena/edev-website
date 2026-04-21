@@ -62,7 +62,7 @@ export default async function InvoicesPage() {
 
       <main className="max-w-7xl mx-auto px-6 md:px-10 py-12">
         <div className="mb-10">
-          <p className="text-label text-amber mb-3">Invoices</p>
+          <p className="text-label text-accent mb-3">Invoices</p>
           <h1 className="text-heading font-display text-navy">All invoices.</h1>
         </div>
 
@@ -106,7 +106,7 @@ function StatCard({
 }) {
   return (
     <div className="bg-white rounded-2xl border border-border p-6">
-      <p className="text-label text-amber mb-3">{label}</p>
+      <p className="text-label text-accent mb-3">{label}</p>
       <p className="font-display font-bold text-navy text-3xl mb-1">{value}</p>
       <p className="text-xs text-text-muted">{hint}</p>
     </div>

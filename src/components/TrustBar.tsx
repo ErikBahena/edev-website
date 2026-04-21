@@ -12,7 +12,7 @@ export default function TrustBar() {
         {items.map((item, i) => (
           <span key={i} className="flex items-center gap-5 px-5">
             <span className="font-display font-semibold text-sm whitespace-nowrap tracking-tight"
-              style={{ color: "rgba(13,27,62,0.28)" }}>
+              style={{ color: "rgba(var(--navy-rgb),0.28)" }}>
               {item}
             </span>
             <span className="text-blue/40 text-xs flex-shrink-0">◆</span>

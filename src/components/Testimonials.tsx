@@ -48,12 +48,12 @@ export default function Testimonials() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-36 px-6 md:px-14 bg-white">
+    <section ref={sectionRef} className="section bg-white">
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
         <div className="mb-16 md:mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-10 border-b border-border">
           <div>
-            <p className="text-label text-amber mb-5">What Clients Say</p>
+            <p className="text-label text-accent mb-5">What Clients Say</p>
             <h2 className="text-heading font-display text-navy">
               In their words.
             </h2>
@@ -88,7 +88,7 @@ export default function Testimonials() {
                     {t.name}
                   </p>
                   <p className="text-text-muted text-sm">{t.role}</p>
-                  <p className="text-amber text-xs font-display font-medium mt-1">
+                  <p className="text-accent text-xs font-display font-medium mt-1">
                     {t.location}
                   </p>
                 </div>
@@ -101,7 +101,7 @@ export default function Testimonials() {
                   className="absolute -top-3 -left-1 font-display font-bold leading-none select-none pointer-events-none"
                   style={{
                     fontSize: "5rem",
-                    color: "rgba(196,136,42,0.1)",
+                    color: "rgba(var(--accent-rgb),0.1)",
                   }}
                 >
                   &ldquo;

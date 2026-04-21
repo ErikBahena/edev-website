@@ -94,7 +94,7 @@ export default function CaseStudies() {
                   a dedicated header section. */}
               <div className="case-reveal opacity-0 flex items-center gap-4 mb-8 md:mb-10">
                 {isFirst && (
-                  <p className="text-label text-amber">Our Work</p>
+                  <p className="text-label text-accent">Our Work</p>
                 )}
                 <div className="h-px flex-1 bg-border" />
                 <p className="text-xs font-display font-medium text-text-muted whitespace-nowrap">
@@ -107,18 +107,18 @@ export default function CaseStudies() {
                 <div className="flex items-center gap-3">
                   <div
                     className="w-3 h-3 rounded-sm flex-shrink-0"
-                    style={{ background: "var(--amber)" }}
+                    style={{ background: "var(--accent)" }}
                   />
                   <span
                     className="font-display font-bold leading-none"
                     style={{
                       fontSize: "clamp(2rem, 3.5vw, 3rem)",
-                      color: "rgba(13,27,62,0.08)",
+                      color: "rgba(var(--navy-rgb),0.08)",
                     }}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <p className="text-label text-amber">{p.industry}</p>
+                  <p className="text-label text-accent">{p.industry}</p>
                 </div>
                 <p className="font-display text-sm font-medium text-text-muted">
                   {p.client}
@@ -137,7 +137,7 @@ export default function CaseStudies() {
                     style={{
                       width: "clamp(180px, 20vw, 280px)",
                       height: "clamp(180px, 20vw, 280px)",
-                      border: "2px solid var(--amber)",
+                      border: "2px solid var(--accent)",
                       opacity: 0.1,
                       top: "-2.5rem",
                       ...(imageRight

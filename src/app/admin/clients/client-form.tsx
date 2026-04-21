@@ -166,7 +166,7 @@ function Field({
     <div>
       <label className="block text-xs font-display font-medium text-text-muted mb-2">
         {label}
-        {required && <span className="text-amber ml-1">*</span>}
+        {required && <span className="text-accent ml-1">*</span>}
       </label>
       <input
         type={type}

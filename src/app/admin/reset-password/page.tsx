@@ -10,7 +10,7 @@ export default function ResetPasswordPage() {
     <main className="min-h-screen flex items-center justify-center bg-bg px-6">
       <div className="w-full max-w-sm">
         <div className="mb-8">
-          <p className="text-label text-amber mb-3">Elma Digital</p>
+          <p className="text-label text-accent mb-3">Elma Digital</p>
           <h1 className="text-heading font-display text-navy">
             New password.
           </h1>

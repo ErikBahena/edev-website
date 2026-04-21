@@ -50,10 +50,10 @@ export default function Process() {
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen flex flex-col justify-center py-28 md:py-36 px-6 md:px-14 bg-bg"
+      className="section bg-bg"
     >
       <div className="max-w-7xl mx-auto w-full">
-        <p className="text-label text-amber mb-12 manifesto-line opacity-0">
+        <p className="text-label text-accent mb-12 manifesto-line opacity-0">
           Our Approach
         </p>
 

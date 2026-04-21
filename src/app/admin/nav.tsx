@@ -24,7 +24,7 @@ export default async function AdminNav() {
             className="font-display font-bold text-navy text-lg"
           >
             Elma Digital
-            <span className="text-amber ml-2 text-xs font-medium uppercase tracking-wider">
+            <span className="text-accent ml-2 text-xs font-medium uppercase tracking-wider">
               Admin
             </span>
           </Link>

@@ -41,7 +41,7 @@ export default function CTA() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 60% at 30% 50%, rgba(3,76,178,0.22) 0%, transparent 70%)",
+            "radial-gradient(ellipse 60% 60% at 30% 50%, rgba(var(--blue-rgb),0.22) 0%, transparent 70%)",
         }}
       />
 
@@ -54,7 +54,7 @@ export default function CTA() {
           <div>
             <p
               className="cta-reveal text-label mb-6 opacity-0"
-              style={{ color: "var(--amber)" }}
+              style={{ color: "var(--accent)" }}
             >
               Contact &middot; Elma, WA
             </p>
@@ -86,7 +86,7 @@ export default function CTA() {
                 >
                   <span
                     className="w-1 h-1 rounded-full"
-                    style={{ background: "var(--amber)" }}
+                    style={{ background: "var(--accent)" }}
                   />
                   {chip}
                 </span>
@@ -151,11 +151,11 @@ export default function CTA() {
             >
               <div
                 className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 transition-transform duration-200 group-hover:scale-[1.04]"
-                style={{ background: "rgba(196,136,42,0.22)" }}
+                style={{ background: "rgba(var(--accent-rgb),0.22)" }}
               >
                 <svg
                   className="w-5 h-5"
-                  style={{ color: "var(--amber)" }}
+                  style={{ color: "var(--accent)" }}
                   viewBox="0 0 16 16"
                   fill="currentColor"
                   aria-hidden="true"
@@ -188,15 +188,15 @@ export default function CTA() {
               </svg>
             </a>
 
-            {/* Primary action — SMS prefilled. Amber stands out on navy and
-                is on-brand (the accent color used throughout). */}
+            {/* Primary action — SMS prefilled. The accent color stands out
+                on navy and is on-brand (used throughout the site). */}
             <a
               href={`sms:${PHONE}?body=${encodeURIComponent(SMS_INTRO)}`}
               className="cta-reveal opacity-0 inline-flex items-center justify-center gap-2 mt-1 px-6 py-4 rounded-xl font-display font-semibold text-sm tracking-wide transition-all duration-200 hover:-translate-y-0.5"
               style={{
-                background: "var(--amber)",
+                background: "var(--accent)",
                 color: "var(--navy)",
-                boxShadow: "0 8px 24px -8px rgba(196,136,42,0.4)",
+                boxShadow: "0 8px 24px -8px rgba(var(--accent-rgb),0.4)",
               }}
             >
               Start a Text Conversation

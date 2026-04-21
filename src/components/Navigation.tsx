@@ -75,13 +75,13 @@ export default function Navigation() {
               key={l.label}
               href={l.href}
               className="font-display font-semibold text-sm tracking-wide transition-colors duration-200"
-              style={{ color: scrolled ? "rgba(13,27,62,0.45)" : "rgba(255,255,255,0.45)" }}
+              style={{ color: scrolled ? "rgba(var(--navy-rgb),0.45)" : "rgba(255,255,255,0.45)" }}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.color = scrolled ? "var(--navy)" : "white")
               }
               onMouseLeave={(e) =>
                 (e.currentTarget.style.color = scrolled
-                  ? "rgba(13,27,62,0.45)"
+                  ? "rgba(var(--navy-rgb),0.45)"
                   : "rgba(255,255,255,0.45)")
               }
             >
@@ -95,13 +95,13 @@ export default function Navigation() {
           <a
             href={`tel:${PHONE}`}
             className="font-display font-medium text-sm transition-colors duration-200"
-            style={{ color: scrolled ? "rgba(13,27,62,0.4)" : "rgba(255,255,255,0.4)" }}
+            style={{ color: scrolled ? "rgba(var(--navy-rgb),0.4)" : "rgba(255,255,255,0.4)" }}
             onMouseEnter={(e) =>
               (e.currentTarget.style.color = scrolled ? "var(--navy)" : "white")
             }
             onMouseLeave={(e) =>
               (e.currentTarget.style.color = scrolled
-                ? "rgba(13,27,62,0.4)"
+                ? "rgba(var(--navy-rgb),0.4)"
                 : "rgba(255,255,255,0.4)")
             }
           >

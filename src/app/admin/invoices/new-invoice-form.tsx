@@ -76,7 +76,7 @@ export default function NewInvoiceForm({
       <div>
         <div className="flex items-center justify-between mb-3">
           <label className="block text-xs font-display font-medium text-text-muted">
-            Line items <span className="text-amber">*</span>
+            Line items <span className="text-accent">*</span>
           </label>
           <button
             type="button"

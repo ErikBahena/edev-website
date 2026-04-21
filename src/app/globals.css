@@ -3,13 +3,27 @@
 :root {
   --bg: #F4F1EB;
   --bg-warm: #EDE9E1;
+
+  /* Brand colors. Each has a solid hex AND a matching `-rgb` triplet for
+     use inside rgba() — e.g. `rgba(var(--navy-rgb), 0.08)`. That way
+     every translucent tint in the app comes from these tokens, and
+     changing a brand color is a one-line edit here. */
   --navy: #0D1B3E;
+  --navy-rgb: 13, 27, 62;
   --navy-mid: #162852;
+
   --blue: #034CB2;
+  --blue-rgb: 3, 76, 178;
   --blue-dark: #023594;
   --blue-light: #E8EFFA;
-  --amber: #C4882A;
-  --amber-light: #F5E9D4;
+
+  /* Accent: deep forest green. Swap the brand accent by editing only
+     these three lines — every call site uses var(--accent) or
+     rgba(var(--accent-rgb), X). */
+  --accent: #2A5A3E;
+  --accent-rgb: 42, 90, 62;
+  --accent-light: #DCE8DE;
+
   --text: #0D1B3E;
   --text-muted: #6B7280;
   --text-dim: #9CA3AF;
@@ -27,7 +41,7 @@
   --color-blue: var(--blue);
   --color-blue-dark: var(--blue-dark);
   --color-blue-light: var(--blue-light);
-  --color-amber: var(--amber);
+  --color-accent: var(--accent);
   --color-text: var(--text);
   --color-text-muted: var(--text-muted);
   --color-border: var(--border);

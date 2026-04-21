@@ -27,12 +27,12 @@ export default function About() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-36 px-6 md:px-14 bg-bg-warm">
+    <section ref={sectionRef} className="section bg-bg-warm">
       <div className="max-w-7xl mx-auto">
 
         {/* Quote + photo */}
         <div className="mb-16 about-reveal opacity-0">
-          <p className="text-label text-amber mb-8">Who&apos;s Behind This</p>
+          <p className="text-label text-accent mb-8">Who&apos;s Behind This</p>
           <div className="grid md:grid-cols-[1fr_auto] gap-10 md:gap-14 items-center">
             <blockquote className="text-heading font-display text-navy max-w-3xl">
               &ldquo;I&apos;m a software engineer from Elma. I started this
@@ -46,7 +46,7 @@ export default function About() {
                 style={{
                   width: "clamp(280px, 22vw, 360px)",
                   height: "clamp(280px, 22vw, 360px)",
-                  border: "2px solid var(--amber)",
+                  border: "2px solid var(--accent)",
                   opacity: 0.15,
                   top: "-28px",
                   right: "-32px",
