@@ -1,156 +1,367 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import BrowserFrame from "./BrowserFrame";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const PHONE = "3608435566";
 
-const services = [
+type LogoProject = {
+  kind: "logo";
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  client: string;
+  sub: string;
+};
+
+type SiteProject = {
+  kind: "site" | "software";
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  appName: string;
+  client: string;
+  sub: string;
+};
+
+type Project = LogoProject | SiteProject;
+
+type Service = {
+  n: string;
+  title: string;
+  shortTitle: string; // Short label used in the chip
+  smsBody: string;
+  description: string;
+  pricing: { name: string; price: string }[];
+  projects: Project[];
+};
+
+const services: Service[] = [
   {
     n: "01",
     title: "Logo & Print Design",
+    shortTitle: "Logo & Print",
     smsBody: "Hi Erik, I'm interested in Logo & Print Design. Can we chat?",
-    description: "A logo that makes your business look like it takes itself seriously. Flyers, menus, business cards — everything that puts your name in front of customers. Fast turnaround, flat pricing, no surprises.",
+    description:
+      "A logo that makes your business look like it takes itself seriously. Flyers, menus, business cards — everything that puts your name in front of customers. Fast turnaround, flat pricing, no surprises.",
     pricing: [
       { name: "Logo Design", price: "from $50" },
       { name: "Flyer / Print Design", price: "from $25" },
       { name: "Business Cards", price: "from $25" },
     ],
+    projects: [
+      {
+        kind: "logo",
+        src: "/stripe-logo.png",
+        alt: "Elma Digital logo mark",
+        width: 1200,
+        height: 300,
+        client: "Elma Digital",
+        sub: "Our own brand · Elma, WA",
+      },
+    ],
   },
   {
     n: "02",
     title: "Website Design",
+    shortTitle: "Websites",
     smsBody: "Hi Erik, I'm interested in getting a website built. Can we chat?",
-    description: "A real website built for your business — not a $20/month template someone else's customers are also using. We build it, add a CMS so you can update it yourself, and make sure Google can actually find you.",
+    description:
+      "A real website built for your business — not a $20/month template someone else's customers are also using. We build it, add a CMS so you can update it yourself, and make sure Google can actually find you.",
     pricing: [
       { name: "Single-page + CMS", price: "from $750" },
       { name: "Multi-page + CMS", price: "from $1,500" },
       { name: "Monthly maintenance", price: "ask us" },
     ],
+    projects: [
+      {
+        kind: "site",
+        src: "/dynamic-stylz.png",
+        alt: "Dynamic Stylz Salon — hair salon website",
+        width: 1600,
+        height: 1041,
+        appName: "dynamicstylz.com",
+        client: "Dynamic Stylz Salon",
+        sub: "Hair salon · Elma, WA",
+      },
+    ],
   },
   {
     n: "03",
     title: "Custom Software",
-    smsBody: "Hi Erik, I'm interested in Custom Software for my business. Can we chat?",
-    description: "When your business has outgrown spreadsheets and generic tools. We sit with you, learn how your operation actually works, and build software that fits — employee tracking, invoicing, inventory, reporting, whatever the bottleneck is.",
+    shortTitle: "Custom Software",
+    smsBody:
+      "Hi Erik, I'm interested in Custom Software for my business. Can we chat?",
+    description:
+      "When your business has outgrown spreadsheets and generic tools. Every engagement starts with a free on-site visit — we sit with you, learn how your operation actually works, and only then do we build. Employee tracking, invoicing, inventory, reporting — whatever the bottleneck is.",
     pricing: [
-      { name: "Discovery call", price: "free" },
       { name: "Custom build", price: "from $5,000" },
       { name: "Monthly support", price: "from $200/mo" },
+      { name: "On-site discovery", price: "complimentary" },
+    ],
+    projects: [
+      {
+        kind: "software",
+        src: "/paintmate-dashboard.png",
+        alt: "PaintMate work entries dashboard",
+        width: 3024,
+        height: 1546,
+        appName: "PaintMate",
+        client: "Alberto's Residential Painting",
+        sub: "Painting contractor · Elma, WA",
+      },
+      {
+        kind: "software",
+        src: "/herdlife-dashboard.png",
+        alt: "HerdLife herd management dashboard",
+        width: 2586,
+        height: 1144,
+        appName: "HerdLife",
+        client: "Torres Dairy",
+        sub: "Dairy farm · Grays Harbor, WA",
+      },
     ],
   },
 ];
 
 export default function Services() {
-  const [open, setOpen] = useState<number | null>(null);
-  const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [active, setActive] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
+  // Scroll-triggered reveal on first view
   useEffect(() => {
-    rowRefs.current.forEach((row, i) => {
-      if (!row) return;
-      gsap.fromTo(row, { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.7, delay: i * 0.08, ease: "power3.out",
-          scrollTrigger: { trigger: row, start: "top 90%" } });
-    });
+    if (!sectionRef.current) return;
+    gsap.fromTo(
+      sectionRef.current.querySelectorAll(".svc-reveal"),
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        stagger: 0.08,
+        ease: "power3.out",
+        scrollTrigger: { trigger: sectionRef.current, start: "top 85%" },
+      }
+    );
   }, []);
 
-  const toggle = (i: number) => setOpen(open === i ? null : i);
+  // Fade the content area when switching tabs
+  useEffect(() => {
+    if (!contentRef.current) return;
+    gsap.fromTo(
+      contentRef.current,
+      { opacity: 0, y: 12 },
+      { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
+    );
+  }, [active]);
+
+  const service = services[active];
 
   return (
-    <section id="services" className="py-20 md:py-28 px-6 md:px-14 bg-white">
-      <div className="max-w-7xl mx-auto">
-
+    <section
+      id="services"
+      ref={sectionRef}
+      className="section bg-white"
+    >
+      <div className="max-w-7xl mx-auto w-full">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12 pb-10 border-b border-border">
+        <div className="svc-reveal opacity-0 flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6 md:mb-8">
           <div>
             <p className="text-label text-accent mb-3">What We Do</p>
-            <h2 className="text-heading font-display text-navy">
-              Every digital need,<br />one local team.
+            <h2 className="text-heading font-display text-navy leading-[1.05]">
+              Every digital need,
+              <br />
+              one local team.
             </h2>
           </div>
-          <p className="text-body-lg text-text-muted max-w-xs md:text-right leading-relaxed">
-            Start with a logo.<br className="hidden md:block" />
-            End with software that runs<br className="hidden md:block" />
-            your whole operation.
+          <p className="text-body-lg text-text-muted max-w-xs md:text-right leading-relaxed hidden md:block">
+            Start with a logo. End with software that runs your whole
+            operation.
           </p>
         </div>
 
-        {/* Service rows */}
-        <div>
-          {services.map((s, i) => (
-            <div key={i} ref={(el) => { rowRefs.current[i] = el; }} className="opacity-0">
-
-              {/* Row header */}
+        {/* Tab chips */}
+        <div className="svc-reveal opacity-0 flex flex-wrap gap-2 md:gap-3 pb-6 md:pb-8 border-b border-border mb-8 md:mb-10">
+          {services.map((s, i) => {
+            const isActive = i === active;
+            return (
               <button
-                onClick={() => toggle(i)}
-                className="w-full border-t border-border py-7 flex items-center gap-5 md:gap-8 text-left group"
+                key={i}
+                onClick={() => setActive(i)}
+                className="group inline-flex items-center gap-3 px-4 md:px-5 py-2.5 md:py-3 rounded-full font-display text-sm font-medium transition-all duration-200"
+                style={{
+                  background: isActive ? "var(--navy)" : "transparent",
+                  color: isActive ? "white" : "var(--navy)",
+                  border: isActive
+                    ? "1px solid var(--navy)"
+                    : "1px solid var(--border-strong)",
+                }}
               >
-                <span className="text-label text-text-dim w-7 flex-shrink-0 group-hover:text-navy transition-colors">
+                <span
+                  className="text-label"
+                  style={{
+                    color: isActive
+                      ? "rgba(255,255,255,0.45)"
+                      : "var(--text-dim)",
+                  }}
+                >
                   {s.n}
                 </span>
-                <span className={`text-heading font-display flex-1 leading-[1.05] transition-colors duration-200 ${open === i ? "text-blue" : "text-navy group-hover:text-blue"}`}>
-                  {s.title}
-                </span>
-                <span className="font-display font-semibold text-base text-accent hidden md:block flex-shrink-0">
+                <span>{s.shortTitle}</span>
+                <span
+                  className="font-display font-medium text-xs"
+                  style={{
+                    color: isActive
+                      ? "rgba(255,255,255,0.6)"
+                      : "var(--accent)",
+                  }}
+                >
                   {s.pricing[0].price}
                 </span>
-                <span className={`flex-shrink-0 w-9 h-9 rounded-full border border-border flex items-center justify-center transition-all duration-300 group-hover:border-navy ${open === i ? "bg-navy border-navy rotate-45" : ""}`}>
-                  <svg className={`w-3.5 h-3.5 transition-colors ${open === i ? "text-white" : "text-text-muted group-hover:text-navy"}`} viewBox="0 0 14 14" fill="none">
-                    <path d="M7 1V13M1 7H13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                  </svg>
-                </span>
               </button>
-
-              {/* Expanded panel */}
-              <div className={`overflow-hidden transition-all duration-500 ease-in-out ${open === i ? "max-h-[36rem] opacity-100" : "max-h-0 opacity-0"}`}>
-                <div className="pb-12 md:pl-[3.75rem]">
-
-                  {/* Description */}
-                  <p className="text-body-lg text-text-muted leading-relaxed max-w-2xl mb-10">
-                    {s.description}
-                  </p>
-
-                  {/* Pricing — clean columns, no box */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-border mb-10 rounded-lg overflow-hidden border border-border">
-                    {s.pricing.map((tier, j) => (
-                      <div key={j} className="bg-white px-5 py-4 sm:px-6 sm:py-5">
-                        <p className="text-xs font-medium text-text-muted mb-1.5">{tier.name}</p>
-                        <p className="font-display font-bold text-xl text-navy">{tier.price}</p>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* CTAs */}
-                  <div className="flex flex-wrap gap-3 justify-end">
-                    <a
-                      href={`sms:${PHONE}?body=${encodeURIComponent(s.smsBody)}`}
-                      className="btn-primary px-7 py-3 text-sm flex items-center gap-2"
-                    >
-                      <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
-                        <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h13A1.5 1.5 0 0 1 16 3.5v7A1.5 1.5 0 0 1 14.5 12H9l-3 3v-3H1.5A1.5 1.5 0 0 1 0 10.5v-7z"/>
-                      </svg>
-                      Text us about this
-                    </a>
-                    <a
-                      href={`tel:${PHONE}`}
-                      className="btn-outline-dark px-7 py-3 text-sm"
-                    >
-                      Call (360) 843-5566
-                    </a>
-                  </div>
-
-                </div>
-              </div>
-
-            </div>
-          ))}
-          <div className="border-t border-border" />
+            );
+          })}
         </div>
 
+        {/* Active service content */}
+        <div ref={contentRef} className="flex-1">
+          <div className="grid lg:grid-cols-[1fr_1.4fr] gap-8 md:gap-10 lg:gap-14 items-start">
+            {/* Text + pricing + CTAs */}
+            <div>
+              <h3 className="font-display font-bold text-navy mb-4 leading-[1.1]" style={{ fontSize: "clamp(1.4rem, 2.2vw, 1.9rem)" }}>
+                {service.title}
+              </h3>
+              <p className="text-body-lg text-text-muted leading-relaxed mb-6">
+                {service.description}
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-border mb-6 rounded-lg overflow-hidden border border-border">
+                {service.pricing.map((tier, j) => (
+                  <div
+                    key={j}
+                    className="bg-white px-4 py-3 sm:px-5 sm:py-4"
+                  >
+                    <p className="text-xs font-medium text-text-muted mb-1">
+                      {tier.name}
+                    </p>
+                    <p className="font-display font-bold text-lg text-navy">
+                      {tier.price}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href={`sms:${PHONE}?body=${encodeURIComponent(service.smsBody)}`}
+                  className="btn-primary px-6 py-3 text-sm flex items-center gap-2"
+                >
+                  <svg
+                    className="w-4 h-4"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                  >
+                    <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h13A1.5 1.5 0 0 1 16 3.5v7A1.5 1.5 0 0 1 14.5 12H9l-3 3v-3H1.5A1.5 1.5 0 0 1 0 10.5v-7z" />
+                  </svg>
+                  Text us about this
+                </a>
+                <a
+                  href={`tel:${PHONE}`}
+                  className="btn-outline-dark px-6 py-3 text-sm"
+                >
+                  Call (360) 843-5566
+                </a>
+              </div>
+            </div>
+
+            {/* Showcase */}
+            <ProjectShowcase projects={service.projects} />
+          </div>
+        </div>
       </div>
     </section>
+  );
+}
+
+function ProjectShowcase({ projects }: { projects: Project[] }) {
+  if (projects.length === 0) {
+    return (
+      <div className="rounded-2xl border border-dashed border-border p-10 text-center bg-bg">
+        <p className="text-sm font-display font-medium text-text-muted">
+          Featured work coming soon.
+        </p>
+      </div>
+    );
+  }
+
+  const columns = projects.length === 1 ? "grid-cols-1" : "sm:grid-cols-2";
+
+  return (
+    <div className={`grid ${columns} gap-5 md:gap-6`}>
+      {projects.map((p, i) => (
+        <ProjectCard key={i} project={p} />
+      ))}
+    </div>
+  );
+}
+
+function ProjectCard({ project }: { project: Project }) {
+  if (project.kind === "logo") {
+    return (
+      <figure>
+        <div
+          className="rounded-xl flex items-center justify-center px-6 py-10 md:py-14"
+          style={{
+            background: "var(--bg)",
+            border: "1px solid var(--border)",
+          }}
+        >
+          <Image
+            src={project.src}
+            alt={project.alt}
+            width={project.width}
+            height={project.height}
+            className="max-w-[70%] h-auto w-auto"
+            sizes="(max-width: 768px) 60vw, 400px"
+            quality={90}
+          />
+        </div>
+        <figcaption className="mt-3">
+          <p className="font-display font-semibold text-navy text-sm">
+            {project.client}
+          </p>
+          <p className="text-text-muted text-xs mt-0.5">{project.sub}</p>
+        </figcaption>
+      </figure>
+    );
+  }
+
+  return (
+    <figure>
+      <BrowserFrame
+        src={project.src}
+        alt={project.alt}
+        width={project.width}
+        height={project.height}
+        appName={project.appName}
+        sizes="(max-width: 768px) 100vw, 400px"
+        quality={85}
+        aspectRatio={project.kind === "site" ? "2 / 1" : undefined}
+      />
+      <figcaption className="mt-3">
+        <p className="font-display font-semibold text-navy text-sm">
+          {project.client}
+        </p>
+        <p className="text-text-muted text-xs mt-0.5">{project.sub}</p>
+      </figcaption>
+    </figure>
   );
 }
