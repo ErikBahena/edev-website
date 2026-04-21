@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import BrowserFrame from "./BrowserFrame";
 
 const PHONE = "3608435566";
 const PHONE_DISPLAY = "(360) 843-5566";
@@ -24,6 +25,8 @@ export default function Hero() {
         { opacity: 1, y: 0, skewY: 0, duration: 0.8, stagger: 0.1, ease: "power3.out" }, "-=0.2")
       .fromTo(".hero-sub", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, "-=0.3")
       .fromTo(".hero-cta", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, "-=0.2")
+      .fromTo(".hero-showcase", { opacity: 0, y: 30, scale: 0.96 },
+        { opacity: 1, y: 0, scale: 1, duration: 1, ease: "power3.out" }, "-=0.8")
       .fromTo(".hero-services", { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power2.out" }, "-=0.4");
   }, []);
 
@@ -36,10 +39,9 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      // 100svh uses small-viewport-height so it fits when the mobile URL bar
-      // is visible. Tighter padding on mobile so content never overflows 100vh.
-      className="relative flex flex-col justify-end pt-24 pb-10 md:pt-28 md:pb-20 px-6 md:px-14 overflow-hidden bg-navy"
-      style={{ minHeight: "100svh" }}
+      // Uses the `.section--hero` variant (full 100svh, content justified to
+      // the bottom so the navbar overlays cleanly above the headline).
+      className="section section--hero relative overflow-hidden bg-navy"
     >
       {/* Grid */}
       <div
@@ -133,26 +135,107 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right — service list (decorative, desktop only) */}
-          <div className="hero-services opacity-0 hidden md:block">
-            <div className="space-y-3 text-right">
-              {SERVICES.map((s) => (
-                <a
-                  href="#services"
-                  key={s.n}
-                  className="flex items-baseline justify-end gap-4 group transition-all duration-200"
-                >
-                  <span className="text-label opacity-30 text-white group-hover:opacity-60 transition-opacity">
-                    {s.n}
-                  </span>
-                  <span className="font-display font-semibold text-lg text-white/70 group-hover:text-white transition-colors">
-                    {s.label}
-                  </span>
-                  <span className="font-display text-sm font-medium text-amber w-24 text-right">
-                    {s.price}
-                  </span>
-                </a>
-              ))}
+          {/* Right column — product showcase + service list (desktop only) */}
+          <div className="hidden md:flex flex-col gap-10 lg:gap-12 items-end">
+            {/* Stacked product screenshots — "this is what I build" */}
+            <div
+              className="hero-showcase opacity-0 relative w-[460px] lg:w-[540px]"
+              style={{ height: "clamp(340px, 36vh, 420px)" }}
+            >
+              {/* Amber ambient glow behind */}
+              <div
+                className="absolute inset-0 -z-10 blur-3xl pointer-events-none"
+                style={{
+                  background:
+                    "radial-gradient(circle at 50% 50%, rgba(196,136,42,0.22) 0%, transparent 70%)",
+                }}
+              />
+
+              {/* Dynamic Stylz — back card, tucked top-left, tilted left */}
+              <div
+                className="absolute w-[52%]"
+                style={{
+                  top: "0%",
+                  left: "2%",
+                  transform: "rotate(-6deg)",
+                  transformOrigin: "center",
+                  filter: "drop-shadow(0 12px 24px rgba(0,0,0,0.32))",
+                }}
+              >
+                <BrowserFrame
+                  src="/dynamic-stylz.png"
+                  alt="Dynamic Stylz Salon — website for a local hair salon"
+                  width={1600}
+                  height={1041}
+                  appName="dynamicstylz.com"
+                  sizes="280px"
+                />
+              </div>
+
+              {/* HerdLife — middle-right, tilted right */}
+              <div
+                className="absolute w-[54%]"
+                style={{
+                  top: "18%",
+                  right: "0%",
+                  transform: "rotate(5deg)",
+                  transformOrigin: "center",
+                  filter: "drop-shadow(0 20px 36px rgba(0,0,0,0.4))",
+                }}
+              >
+                <BrowserFrame
+                  src="/herdlife-dashboard.png"
+                  alt="HerdLife — custom software for dairy farms"
+                  width={2586}
+                  height={1144}
+                  appName="HerdLife"
+                  sizes="300px"
+                />
+              </div>
+
+              {/* PaintMate — front, bottom-center, largest, almost level */}
+              <div
+                className="absolute w-[68%]"
+                style={{
+                  bottom: "0%",
+                  left: "14%",
+                  transform: "rotate(-1deg)",
+                  transformOrigin: "center",
+                  filter: "drop-shadow(0 32px 52px rgba(0,0,0,0.55))",
+                }}
+              >
+                <BrowserFrame
+                  src="/paintmate-dashboard.png"
+                  alt="PaintMate — custom software for painting contractors"
+                  width={3024}
+                  height={1546}
+                  appName="PaintMate"
+                  sizes="400px"
+                />
+              </div>
+            </div>
+
+            {/* Services list */}
+            <div className="hero-services opacity-0">
+              <div className="space-y-3 text-right">
+                {SERVICES.map((s) => (
+                  <a
+                    href="#services"
+                    key={s.n}
+                    className="flex items-baseline justify-end gap-4 group transition-all duration-200"
+                  >
+                    <span className="text-label opacity-30 text-white group-hover:opacity-60 transition-opacity">
+                      {s.n}
+                    </span>
+                    <span className="font-display font-semibold text-lg text-white/70 group-hover:text-white transition-colors">
+                      {s.label}
+                    </span>
+                    <span className="font-display text-sm font-medium text-amber w-24 text-right">
+                      {s.price}
+                    </span>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>

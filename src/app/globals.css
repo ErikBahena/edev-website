@@ -39,8 +39,35 @@
 
 * { box-sizing: border-box; }
 
-html { background: var(--bg); color: var(--text); scroll-behavior: auto; }
+html { background: var(--bg); color: var(--text); scroll-behavior: auto; scroll-padding-top: 4.5rem; }
 body { background: var(--bg); font-family: var(--font-inter), system-ui, sans-serif; overflow-x: hidden; }
+
+/* ─── Section primitive ───
+ * The home page is a single-screen-per-section design. Every content section
+ * uses `.section`: it fills the viewport below the fixed 4.5rem nav and
+ * vertically centers its content.
+ *
+ * Anchor offset is handled ONCE, globally, by `scroll-padding-top: 4.5rem`
+ * on <html>. Do NOT add `scroll-margin-top` to `.section` — the two would
+ * stack and #anchor jumps would land 4.5rem below the nav instead of flush.
+ *
+ * Use `.section.section--hero` on the hero: full 100svh (nav overlays
+ * transparently) and content justified to the bottom.
+ */
+.section {
+  min-height: calc(100svh - 4.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem 1.5rem;          /* py-12 px-6  */
+}
+@media (min-width: 768px) {
+  .section { padding: 3.5rem 3.5rem; }  /* md:py-14 md:px-14 */
+}
+.section--hero {
+  min-height: 100svh;
+  justify-content: flex-end;
+}
 
 /* ─── Grain ─── */
 .grain-overlay {
