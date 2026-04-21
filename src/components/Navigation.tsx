@@ -19,10 +19,27 @@ export default function Navigation() {
   useEffect(() => {
     const onScroll = () => {
       const current = window.scrollY;
+      const delta = current - lastScroll.current;
       setScrolled(current > 60);
-      setVisible(current < 60 || current < lastScroll.current);
+      // Near top → always visible. Large jumps (>200px) are anchor nav,
+      // not hide-on-scroll gestures — keep nav visible. Small deltas:
+      // hide when scrolling down, show when scrolling up.
+      if (current < 60 || Math.abs(delta) > 200) {
+        setVisible(true);
+      } else if (delta > 8) {
+        setVisible(false);
+      } else if (delta < -8) {
+        setVisible(true);
+      }
       lastScroll.current = current;
     };
+    // Seed state from the current scroll position so direct loads to an
+    // anchor (e.g. /#services) start with the correct nav styling. Seeding
+    // lastScroll also prevents a spurious 0→N "scroll-down" delta on the
+    // first real scroll event, which would otherwise hide the nav.
+    const initial = window.scrollY;
+    setScrolled(initial > 60);
+    lastScroll.current = initial;
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
