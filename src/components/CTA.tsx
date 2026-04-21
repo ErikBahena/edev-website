@@ -188,14 +188,15 @@ export default function CTA() {
               </svg>
             </a>
 
-            {/* Primary action — SMS prefilled. The accent color stands out
-                on navy and is on-brand (used throughout the site). */}
+            {/* Primary action — SMS prefilled. Accent-colored to stand
+                apart from the phone + email cards above and give the
+                page a clear "do this one thing" moment. */}
             <a
               href={`sms:${PHONE}?body=${encodeURIComponent(SMS_INTRO)}`}
               className="cta-reveal opacity-0 inline-flex items-center justify-center gap-2 mt-1 px-6 py-4 rounded-xl font-display font-semibold text-sm tracking-wide transition-all duration-200 hover:-translate-y-0.5"
               style={{
                 background: "var(--accent)",
-                color: "var(--navy)",
+                color: "var(--accent-fg)",
                 boxShadow: "0 8px 24px -8px rgba(var(--accent-rgb),0.4)",
               }}
             >

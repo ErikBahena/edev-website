@@ -142,7 +142,7 @@ export default function Hero() {
               className="hero-showcase opacity-0 relative w-[460px] lg:w-[540px]"
               style={{ height: "clamp(340px, 36vh, 420px)" }}
             >
-              {/* Accent ambient glow behind */}
+              {/* Ambient accent glow behind */}
               <div
                 className="absolute inset-0 -z-10 blur-3xl pointer-events-none"
                 style={{

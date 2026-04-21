@@ -17,12 +17,15 @@
   --blue-dark: #023594;
   --blue-light: #E8EFFA;
 
-  /* Accent: deep forest green. Swap the brand accent by editing only
-     these three lines — every call site uses var(--accent) or
-     rgba(var(--accent-rgb), X). */
-  --accent: #2A5A3E;
-  --accent-rgb: 42, 90, 62;
-  --accent-light: #DCE8DE;
+  /* Accent: vivid yellow — warm pop against cool navy/blue, Stripe-style.
+     --accent-fg is the text/icon color to use when content sits ON top
+     of --accent (so we can flip to dark text when the accent is light
+     like yellow, and white text when it's dark like violet/navy). Swap
+     the brand accent by editing only these four lines. */
+  --accent: #EAB308;
+  --accent-rgb: 234, 179, 8;
+  --accent-light: #FEF3C7;
+  --accent-fg: var(--navy);     /* dark text on light accent */
 
   --text: #0D1B3E;
   --text-muted: #6B7280;
@@ -137,14 +140,17 @@ html.lenis, html.lenis body { height: auto; }
 }
 
 /* ─── Buttons ─── */
+/* Primary button. Blue-on-whatever so it reads on both the navy hero
+   section and cream admin pages. Using navy here (the old default)
+   made the button invisible on the hero — same color as the bg. */
 .btn-primary {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-  padding: 0.875rem 2rem; background: var(--navy); color: var(--white);
+  padding: 0.875rem 2rem; background: var(--blue); color: var(--white);
   font-family: var(--font-space-grotesk), sans-serif; font-weight: 600;
   font-size: 0.9rem; letter-spacing: 0.01em; border-radius: 4px; border: none;
   transition: background 0.2s ease, transform 0.15s ease;
 }
-.btn-primary:hover { background: var(--blue); transform: translateY(-1px); }
+.btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
 
 .btn-ghost {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
