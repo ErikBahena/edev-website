@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const PHONE = "3608435566";
 const PHONE_DISPLAY = "(360) 843-5566";
-const EMAIL = "erik@elmadigital.io";
+const EMAIL = "erikjbahena@gmail.com";
 const SMS_INTRO = "Hi Erik, I'd like to chat about a project.";
 
 export default function CTA() {
