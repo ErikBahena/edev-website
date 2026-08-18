@@ -110,45 +110,44 @@ function periodEndFromSubscription(sub: Stripe.Subscription): string | null {
 
 async function handleInvoice(supabase: Supabase, invoice: Stripe.Invoice) {
   if (!invoice.id) {
+    // invoice.upcoming has no id — it is a projection, not a real invoice.
     return { warning: "no invoice.id" };
   }
 
   const subscriptionId = subscriptionIdFromInvoice(invoice);
   const customerId = idOf(invoice.customer);
 
-  const base = {
+  // Fields Stripe owns. Everything else on the row (memo, project_id, the
+  // line_items the admin form captured) is ours and must survive a sync.
+  const syncFields: Record<string, unknown> = {
     status: mapStatus(invoice.status),
     stripe_hosted_invoice_url: invoice.hosted_invoice_url ?? null,
     stripe_invoice_pdf: invoice.invoice_pdf ?? null,
     stripe_subscription_id: subscriptionId,
-    paid_at: unixToIso(invoice.status_transitions?.paid_at),
-    sent_at: unixToIso(invoice.status_transitions?.finalized_at),
   };
+  // Never null out a timestamp we have already recorded.
+  const paidAt = unixToIso(invoice.status_transitions?.paid_at);
+  const sentAt = unixToIso(invoice.status_transitions?.finalized_at);
+  if (paidAt) syncFields.paid_at = paidAt;
+  if (sentAt) syncFields.sent_at = sentAt;
 
-  // Does a local row already exist? (admin-created one-off, or a recurring
-  // invoice we've already mirrored on an earlier event)
-  const { data: existing } = await supabase
+  // Stripe fans out invoice.created / .finalized / .paid / .payment_succeeded
+  // for the same invoice near-simultaneously, so handlers run concurrently.
+  // Update-first, then insert-if-absent, then update again: every step is
+  // idempotent, and the insert tolerates a concurrent winner instead of
+  // dying on the stripe_invoice_id unique constraint.
+  const updated = await supabase
     .from("invoices")
-    .select("id")
+    .update(syncFields)
     .eq("stripe_invoice_id", invoice.id)
-    .maybeSingle();
+    .select("id");
 
-  if (existing) {
-    const updates: Record<string, unknown> = { ...base };
-    // Don't null out timestamps we've already recorded.
-    if (!base.paid_at) delete updates.paid_at;
-    if (!base.sent_at) delete updates.sent_at;
-
-    const { error } = await supabase
-      .from("invoices")
-      .update(updates)
-      .eq("id", existing.id);
-    if (error) throw new Error(error.message);
-
-    return { action: "updated", local_invoice_id: existing.id };
+  if (updated.error) throw new Error(updated.error.message);
+  if (updated.data && updated.data.length > 0) {
+    return { action: "updated", local_invoice_id: updated.data[0].id };
   }
 
-  // No local row — this is a Stripe-generated invoice (subscription renewal).
+  // No local row — a Stripe-generated invoice (subscription renewal).
   // Resolve the client through the Stripe customer mapping.
   if (!customerId) {
     return { action: "skipped", reason: "no customer on invoice" };
@@ -161,7 +160,7 @@ async function handleInvoice(supabase: Supabase, invoice: Stripe.Invoice) {
     .maybeSingle();
 
   if (!client) {
-    // Not a client we track (e.g. an invoice created directly in the Stripe
+    // Not a client we track (e.g. an invoice created straight in the Stripe
     // dashboard). Acknowledge so Stripe stops retrying.
     return { action: "skipped", reason: "no client for customer" };
   }
@@ -185,9 +184,10 @@ async function handleInvoice(supabase: Supabase, invoice: Stripe.Invoice) {
     })
   );
 
-  const { data: inserted, error } = await supabase
-    .from("invoices")
-    .insert({
+  // ON CONFLICT DO NOTHING — a concurrent handler may have inserted this row
+  // between our update above and this insert.
+  const { error: insertError } = await supabase.from("invoices").upsert(
+    {
       client_id: client.id,
       project_id: projectId,
       stripe_invoice_id: invoice.id,
@@ -198,14 +198,27 @@ async function handleInvoice(supabase: Supabase, invoice: Stripe.Invoice) {
       due_date: invoice.due_date
         ? new Date(invoice.due_date * 1000).toISOString().slice(0, 10)
         : null,
-      ...base,
-    })
-    .select("id")
-    .single();
+      ...syncFields,
+    },
+    { onConflict: "stripe_invoice_id", ignoreDuplicates: true }
+  );
 
-  if (error) throw new Error(error.message);
+  if (insertError) throw new Error(insertError.message);
 
-  return { action: "inserted", local_invoice_id: inserted.id };
+  // Re-apply the sync fields: if the insert was a no-op because a concurrent
+  // handler won, that handler may have carried older state than this event.
+  const { data: settled, error: settleError } = await supabase
+    .from("invoices")
+    .update(syncFields)
+    .eq("stripe_invoice_id", invoice.id)
+    .select("id");
+
+  if (settleError) throw new Error(settleError.message);
+
+  return {
+    action: "inserted",
+    local_invoice_id: settled?.[0]?.id ?? null,
+  };
 }
 
 // ─── customer.subscription.* ─────────────────────────────────────────────────
