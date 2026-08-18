@@ -8,8 +8,15 @@ import AddInteractionForm from "./add-interaction-form";
 import InteractionsList from "./interactions-list";
 import DeleteClientButton from "./delete-client-button";
 import ClientInvoicesSection from "./client-invoices-section";
+import ClientSubscriptionsSection from "./client-subscriptions-section";
 import { updateClientAction } from "../actions";
-import type { Client, Interaction, Invoice } from "@/lib/types";
+import type {
+  Client,
+  Interaction,
+  Invoice,
+  Project,
+  Subscription,
+} from "@/lib/types";
 
 type PageProps = {
   params: Promise<{ id: string }>;
@@ -63,6 +70,22 @@ export default async function ClientDetailPage({ params }: PageProps) {
     .order("created_at", { ascending: false });
 
   const typedInvoices = (invoices ?? []) as Invoice[];
+
+  const { data: subscriptions } = await supabase
+    .from("subscriptions")
+    .select("*")
+    .eq("client_id", id)
+    .order("created_at", { ascending: false });
+
+  const typedSubscriptions = (subscriptions ?? []) as Subscription[];
+
+  const { data: projects } = await supabase
+    .from("projects")
+    .select("id, name")
+    .eq("client_id", id)
+    .order("created_at", { ascending: false });
+
+  const typedProjects = (projects ?? []) as Pick<Project, "id" | "name">[];
 
   // Pre-bind the client id so the form action only needs formData
   const updateAction = updateClientAction.bind(null, id);
@@ -137,6 +160,15 @@ export default async function ClientDetailPage({ params }: PageProps) {
               <InteractionsList
                 interactions={typedInteractions}
                 clientId={typedClient.id}
+              />
+            </div>
+
+            <div className="mt-12 pt-10 border-t border-border">
+              <ClientSubscriptionsSection
+                clientId={typedClient.id}
+                subscriptions={typedSubscriptions}
+                projects={typedProjects}
+                clientHasEmail={!!typedClient.email}
               />
             </div>
 

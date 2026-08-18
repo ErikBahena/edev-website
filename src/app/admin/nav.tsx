@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { href: "/admin", label: "Dashboard" },
   { href: "/admin/clients", label: "Clients" },
   { href: "/admin/invoices", label: "Invoices" },
+  { href: "/admin/subscriptions", label: "Recurring" },
 ];
 
 export default async function AdminNav() {
