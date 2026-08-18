@@ -30,6 +30,8 @@ const projects = [
     imageWidth: 3024,
     imageHeight: 1546,
     appName: "PaintMate",
+    learnMoreHref: "/paintmate",
+    learnMoreLabel: "See PaintMate for your crew",
   },
   {
     metric: "$100K+",
@@ -53,6 +55,8 @@ const projects = [
     imageWidth: 2586,
     imageHeight: 1144,
     appName: "HerdLife",
+    learnMoreHref: "/herdlife",
+    learnMoreLabel: "See HerdLife for your dairy",
   },
 ];
 
@@ -204,7 +208,7 @@ export default function CaseStudies() {
                   </p>
 
                   {/* Tags */}
-                  <div className="case-reveal opacity-0 flex flex-wrap gap-2">
+                  <div className="case-reveal opacity-0 flex flex-wrap gap-2 mb-6">
                     {p.tags.map((tag) => (
                       <span
                         key={tag}
@@ -214,6 +218,15 @@ export default function CaseStudies() {
                       </span>
                     ))}
                   </div>
+
+                  {/* Learn more — links to the dedicated productized landing page */}
+                  <a
+                    href={p.learnMoreHref}
+                    className="case-reveal opacity-0 inline-flex items-center gap-2 font-display font-semibold text-sm text-blue hover:text-blue-dark transition-colors"
+                  >
+                    {p.learnMoreLabel}
+                    <span aria-hidden="true">→</span>
+                  </a>
                 </div>
               </div>
             </div>

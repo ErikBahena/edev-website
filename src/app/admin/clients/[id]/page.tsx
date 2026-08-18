@@ -7,6 +7,7 @@ import ClientForm from "../client-form";
 import AddInteractionForm from "./add-interaction-form";
 import InteractionsList from "./interactions-list";
 import DeleteClientButton from "./delete-client-button";
+import ReserveLinkCard from "./reserve-link-card";
 import ClientInvoicesSection from "./client-invoices-section";
 import ClientSubscriptionsSection from "./client-subscriptions-section";
 import { updateClientAction } from "../actions";
@@ -193,6 +194,8 @@ export default async function ClientDetailPage({ params }: PageProps) {
                 submitLabel="Save changes"
                 cancelHref="/admin/clients"
               />
+
+              <ReserveLinkCard clientId={typedClient.id} />
 
               <div className="mt-8 pt-6 border-t border-border">
                 <p className="text-xs text-text-muted mb-3">Danger zone</p>

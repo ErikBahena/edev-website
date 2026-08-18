@@ -16,6 +16,7 @@ type Props = {
    * taller screenshots that would otherwise dominate the layout.
    */
   aspectRatio?: string;
+  priority?: boolean;
 };
 
 /**
@@ -32,6 +33,7 @@ export default function BrowserFrame({
   quality = 90,
   className = "",
   aspectRatio,
+  priority = false,
 }: Props) {
   return (
     <div
@@ -83,6 +85,7 @@ export default function BrowserFrame({
         style={aspectRatio ? { aspectRatio } : undefined}
         sizes={sizes}
         quality={quality}
+        priority={priority}
       />
     </div>
   );
