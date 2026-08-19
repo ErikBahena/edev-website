@@ -34,6 +34,7 @@ const schema = {
     "Logo design, flyer design, website design, and custom software for local businesses in Grays Harbor County, Washington.",
   url: "https://elmadigital.io",
   telephone: "+13608435566",
+  email: "erik@elmadigital.io",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Elma",

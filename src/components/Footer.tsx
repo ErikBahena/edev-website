@@ -48,8 +48,8 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="mailto:erikjbahena@gmail.com" className="hover:text-white transition-colors">
-                  erikjbahena@gmail.com
+                <a href="mailto:erik@elmadigital.io" className="hover:text-white transition-colors">
+                  erik@elmadigital.io
                 </a>
               </li>
               <li>Elma, WA 98541</li>

@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 
 const PHONE = "3608435566";
 const PHONE_DISPLAY = "(360) 843-5566";
-const EMAIL = "erikjbahena@gmail.com";
+const EMAIL = "erik@elmadigital.io";
 const SMS_BODY = encodeURIComponent(
   "Hi Erik — I'd like to learn more about PaintMate for my crew.",
 );

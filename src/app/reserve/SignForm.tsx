@@ -145,7 +145,7 @@ export default function SignForm({ token }: { token: string }) {
             Print / Save as PDF
           </button>
           <a
-            href={`mailto:erikjbahena@gmail.com?subject=Signed%20engagement%20${encodeURIComponent(agreementId)}&body=Hi%20Erik%20-%20I%20just%20signed%20engagement%20${encodeURIComponent(agreementId)}%20on%20elmadigital.io%2Freserve.`}
+            href={`mailto:erik@elmadigital.io?subject=Signed%20engagement%20${encodeURIComponent(agreementId)}&body=Hi%20Erik%20-%20I%20just%20signed%20engagement%20${encodeURIComponent(agreementId)}%20on%20elmadigital.io%2Freserve.`}
             className="btn-ghost px-6 py-3 text-sm"
             style={{ color: "white", borderColor: "rgba(255,255,255,0.3)" }}
           >
