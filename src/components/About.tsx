@@ -27,7 +27,7 @@ export default function About() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="section bg-bg-warm">
+    <section id="about" ref={sectionRef} className="section bg-bg-warm">
       <div className="max-w-7xl mx-auto">
 
         {/* Quote + photo */}
