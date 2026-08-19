@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Image from "next/image";
 import BrowserFrame from "@/components/BrowserFrame";
 import GrainOverlay from "@/components/GrainOverlay";
 import Footer from "@/components/Footer";
+
+import ProofStrip from "@/components/ProofStrip";
+import MobileActionBar from "@/components/MobileCallButton";
 
 const PHONE = "3608435566";
 const PHONE_DISPLAY = "(360) 843-5566";
@@ -78,7 +82,7 @@ export default function PaintMatePage() {
           borderBottom: "1px solid rgba(255,255,255,0.08)",
         }}
       >
-        <a href="/" className="flex items-baseline gap-1 flex-shrink-0 mr-auto">
+        <Link href="/" className="flex items-baseline gap-1 flex-shrink-0 mr-auto">
           <span
             className="font-display font-bold tracking-tight leading-none"
             style={{ fontSize: "clamp(1.4rem, 2vw, 1.75rem)", color: "var(--blue)" }}
@@ -91,7 +95,7 @@ export default function PaintMatePage() {
           >
             Digital
           </span>
-        </a>
+        </Link>
         <a
           href={`tel:${PHONE}`}
           className="hidden md:inline-flex font-display font-medium text-sm text-white/55 hover:text-white transition-colors mr-6"
@@ -151,26 +155,33 @@ export default function PaintMatePage() {
                 >
                   Custom job-cost software for painting contractors and trades.
                   Phone clock-in for your crew. Automated supplier reconciliation.
-                  Invoices that build themselves. Built around how your operation
-                  actually runs — not how Procore wishes it did.
+                  Invoices that build themselves. Built around how your crew
+                  actually works — not around a spreadsheet.
                 </p>
 
-                <div className="flex flex-wrap gap-3">
-                  <a href="#talk" className="btn-primary px-7 py-4 text-sm">
-                    Book a Free 20-min Call
+                <div className="flex flex-wrap items-center gap-4">
+                  <a href={`tel:${PHONE}`} className="btn-primary px-7 py-4 text-sm">
+                    Call for a free 20-min chat
                   </a>
-                  <a href="#numbers" className="btn-ghost px-7 py-4 text-sm">
-                    See what changes
-                  </a>
+                  <span className="text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
+                    or text{" "}
+                    <a
+                      href={`sms:${PHONE}?&body=${SMS_BODY}`}
+                      className="font-display font-semibold underline underline-offset-4"
+                      style={{ color: "rgba(255,255,255,0.85)" }}
+                    >
+                      (360) 843-5566
+                    </a>
+                  </span>
                 </div>
 
-                <p
-                  className="mt-8 text-sm"
-                  style={{ color: "rgba(255,255,255,0.4)" }}
-                >
-                  Built by one local engineer in Grays Harbor, WA — for
-                  contractors in the Pacific Northwest.
-                </p>
+                <ProofStrip
+                  builtFor="Alberto&rsquo;s Residential Painting, Elma"
+                  personName="Luis Cruz"
+                  personRole="Owner"
+                  avatarSrc="/headshot-luis.jpg"
+                  facts={["In daily use since 2025", "Built in Grays Harbor, WA"]}
+                />
               </div>
 
               {/* Right — dashboard preview */}
@@ -530,18 +541,20 @@ export default function PaintMatePage() {
 
             <p className="text-sm" style={{ color: "rgba(255,255,255,0.4)" }}>
               Or just{" "}
-              <a
+              <Link
                 href="/"
                 className="underline"
                 style={{ color: "rgba(255,255,255,0.6)" }}
               >
                 visit the main Elma Digital site
-              </a>{" "}
+              </Link>{" "}
               to learn about other things we build.
             </p>
           </div>
         </section>
       </main>
+      <MobileActionBar smsBody="Hi Erik — I'd like to learn more about PaintMate for my crew." />
+
 
       <Footer />
     </>

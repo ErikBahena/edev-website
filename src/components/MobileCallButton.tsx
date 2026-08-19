@@ -3,9 +3,14 @@
 import { useEffect, useState } from "react";
 
 const PHONE = "3608435566";
-const SMS_BODY = "Hi Erik, I'd like to learn more about your services.";
+const DEFAULT_SMS = "Hi Erik, I'd like to learn more about your services.";
 
-export default function MobileActionBar() {
+/**
+ * Sticky call/text bar for phones. Slides in after the hero scrolls away so
+ * the primary action never leaves the screen — on mobile, once the hero CTA
+ * is gone it's gone. `smsBody` lets each landing page prefill its own text.
+ */
+export default function MobileActionBar({ smsBody = DEFAULT_SMS }: { smsBody?: string } = {}) {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -27,7 +32,7 @@ export default function MobileActionBar() {
           </svg>
           Call
         </a>
-        <a href={`sms:${PHONE}?body=${encodeURIComponent(SMS_BODY)}`}
+        <a href={`sms:${PHONE}?body=${encodeURIComponent(smsBody)}`}
           className="flex-[2] flex items-center justify-center gap-2 py-3.5 rounded-lg font-display font-semibold text-sm text-white"
           style={{ background: "var(--navy)" }}>
           <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 16 16" fill="currentColor">

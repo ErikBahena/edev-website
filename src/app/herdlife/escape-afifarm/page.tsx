@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import GrainOverlay from "@/components/GrainOverlay";
 import Footer from "@/components/Footer";
 import SavingsCalculator from "../SavingsCalculator";
@@ -55,7 +56,7 @@ export default function EscapeAfiFarmPost() {
           borderBottom: "1px solid rgba(255,255,255,0.08)",
         }}
       >
-        <a href="/" className="flex items-baseline gap-1 flex-shrink-0 mr-auto">
+        <Link href="/" className="flex items-baseline gap-1 flex-shrink-0 mr-auto">
           <span
             className="font-display font-bold tracking-tight leading-none"
             style={{
@@ -71,7 +72,7 @@ export default function EscapeAfiFarmPost() {
           >
             Digital
           </span>
-        </a>
+        </Link>
         <a href="/herdlife" className="btn-primary px-5 py-2.5 text-sm">
           See HerdLife
         </a>
