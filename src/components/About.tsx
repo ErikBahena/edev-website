@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
   { value: "2", label: "businesses built" },
-  { value: "$100K+", label: "in costs replaced" },
+  { value: "$75K+", label: "in costs replaced" },
   { value: "240+", label: "hours saved / yr" },
   { value: "0", label: "outsourced" },
 ];

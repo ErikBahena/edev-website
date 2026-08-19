@@ -34,15 +34,15 @@ const projects = [
     learnMoreLabel: "See PaintMate for your crew",
   },
   {
-    metric: "$100K+",
+    metric: "$75K+",
     metricLabel: "in software costs eliminated",
     industry: "Dairy Farming",
     client: "Torres Dairy",
     person: "Jose Torres",
     location: "Grays Harbor County, WA",
     headline:
-      "We replaced a $100,000 industry system with something better — and cheaper.",
-    body: "A power surge destroyed Jose’s computer — and with it, his farm management software. The old vendor wanted $100,000+ to get back online, with his data locked in a format only they could read. We built HerdLife: a web app accessible from any device. Workers, vets, and inspectors each have the access they need. His data belongs to him.",
+      "We replaced a $75,000 industry system with something better — and cheaper.",
+    body: "A power surge destroyed Jose’s computer — and with it, his farm management software. The old vendor quoted $75,000+ to get back online, with his data locked in a format only they could read. We built HerdLife: a web app accessible from any device. Workers, vets, and inspectors each have the access they need. His data belongs to him.",
     tags: [
       "Herd Lifecycle Tracking",
       "Role-Based Access",

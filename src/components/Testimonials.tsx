@@ -7,24 +7,46 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const testimonials = [
+/**
+ * Client proof.
+ *
+ * `summary` is a third-person description of how each client runs their
+ * business today — verifiable, and nothing is put in their mouths.
+ * `quote` is reserved for the client's actual words. When a real Google
+ * review lands, paste it into `quote` (and set `stars`) and the card switches
+ * to a real quotation with a star row. Until then it renders as a summary.
+ * Never invent a quote here.
+ */
+type Proof = {
+  name: string;
+  role: string;
+  location: string;
+  headshot: string;
+  project: string;
+  summary: string;
+  quote?: string;   // client's actual words only
+  stars?: number;   // 1–5, only alongside a real quote
+  source?: string;  // e.g. "Google review"
+};
+
+const testimonials: Proof[] = [
   {
-    quote:
-      "I used to spend my evenings in spreadsheets trying to figure out who worked where and what to bill. Now my guys clock in on their phones and when it\u2019s time to invoice, everything\u2019s already there. Erik built something that actually fits how my business works.",
     name: "Luis Cruz",
-    role: "Owner, Alberto\u2019s Residential Painting LLC",
+    role: "Owner, Alberto\u2019s Residential Painting",
     location: "Elma, WA",
     headshot: "/headshot-luis.jpg",
     project: "PaintMate",
+    summary:
+      "Luis\u2019s crew clocks in on their phones. Every job, every hour, every material run is already logged by the time he sits down to invoice. What used to take an evening of spreadsheets now takes about five minutes.",
   },
   {
-    quote:
-      "When my computer died, I thought I lost everything. The old software company wanted over $100,000 just to get me back up and running. Erik built me something better \u2014 I can check my herd from my phone, my vets can log in from anywhere, and I don\u2019t have to worry about losing my data again.",
     name: "Jose Torres",
     role: "Owner, Torres Dairy",
-    location: "Grays Harbor County, WA",
+    location: "Lewis County, WA",
     headshot: "/headshot-jose.jpg",
     project: "HerdLife",
+    summary:
+      "Jose checks his herd from his phone in the barn. His vets log in from their own devices to record preg checks. When an inspector shows up, the report is ready in seconds \u2014 and the data lives in a standard database that belongs to him.",
   },
 ];
 
@@ -53,15 +75,15 @@ export default function Testimonials() {
         {/* Section header */}
         <div className="mb-16 md:mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-10 border-b border-border">
           <div>
-            <p className="text-label text-accent mb-5">What Clients Say</p>
+            <p className="text-label text-accent mb-5">Who we build for</p>
             <h2 className="text-heading font-display text-navy">
-              In their words.
+              How they run now.
             </h2>
           </div>
           <p className="text-body-lg text-text-muted max-w-xs md:text-right">
-            Real feedback from the people
+            Two local businesses, two custom
             <br />
-            we build for.
+            builds, both in daily use.
           </p>
         </div>
 
@@ -94,26 +116,27 @@ export default function Testimonials() {
                 </div>
               </div>
 
-              {/* Quote */}
+              {/* Body: real quote if we have one; otherwise a summary, no quote marks. */}
               <div className="relative flex-1">
-                {/* Decorative quotation mark */}
-                <span
-                  className="absolute -top-3 -left-1 font-display font-bold leading-none select-none pointer-events-none"
-                  style={{
-                    fontSize: "5rem",
-                    color: "rgba(var(--accent-rgb),0.1)",
-                  }}
-                >
-                  &ldquo;
-                </span>
+                {t.quote && (
+                  <span
+                    className="absolute -top-3 -left-1 font-display font-bold leading-none select-none pointer-events-none"
+                    style={{ fontSize: "5rem", color: "rgba(var(--accent-rgb),0.1)" }}
+                  >
+                    &ldquo;
+                  </span>
+                )}
+                {t.quote && t.stars ? (
+                  <p className="text-sm mb-2" style={{ color: "var(--accent)", letterSpacing: "0.08em" }} aria-label={`${t.stars} out of 5 stars`}>
+                    {"\u2605".repeat(t.stars)}
+                    {t.source && <span className="ml-2 text-xs" style={{ color: "var(--text-muted)", letterSpacing: 0 }}>{t.source}</span>}
+                  </p>
+                ) : null}
                 <p
                   className="relative font-display text-navy leading-[1.55] pt-4"
-                  style={{
-                    fontSize: "clamp(1rem, 1.5vw, 1.15rem)",
-                    fontWeight: 500,
-                  }}
+                  style={{ fontSize: "clamp(1rem, 1.5vw, 1.15rem)", fontWeight: 500 }}
                 >
-                  {t.quote}
+                  {t.quote ?? t.summary}
                 </p>
               </div>
 

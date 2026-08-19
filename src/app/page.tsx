@@ -23,11 +23,14 @@ export default function Home() {
       <main className="pb-[72px] md:pb-0">
         <Hero />
         <TrustBar />
-        <Services />
-        <Process />
+        {/* Order is deliberate: proof before pitch. A local buyer decides on
+            "who is this person" and "have they done it before" — so About and
+            the case studies come first; the services menu and process follow. */}
+        <About />
         <CaseStudies />
         <Testimonials />
-        <About />
+        <Services />
+        <Process />
 
         <CTA />
       </main>

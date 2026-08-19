@@ -34,7 +34,7 @@ export default function Hero() {
   // on both a 375x667 portrait phone AND a 1500x800 laptop.
   // Cap at 6.5rem so "Websites." / "Software." never wrap next to the
   // services list column on desktop.
-  const headlineSize = "clamp(2.25rem, 7.5vw, 6.5rem)";
+  const headlineSize = "clamp(2.1rem, 6.2vw, 5.4rem)";
 
   return (
     <section
@@ -64,8 +64,10 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto w-full">
         <div className="grid md:grid-cols-[1fr_auto] gap-8 md:gap-16 items-end">
-          {/* Left — headline */}
-          <div>
+          {/* Left — headline. min-w-0 lets the 1fr track shrink below its
+              content's min width, otherwise long lines widen the column past
+              the viewport on phones. */}
+          <div className="min-w-0">
             <p
               className="hero-label text-label mb-6 md:mb-8 opacity-0"
               style={{ color: "rgba(255,255,255,0.35)" }}
@@ -73,44 +75,22 @@ export default function Hero() {
               Elma, WA &nbsp;·&nbsp; Locally Owned
             </p>
 
-            {/* Three services as the headline — zero ambiguity about what we do. */}
+            {/* Promise-led headline. The three products live in the subhead + services grid;
+                the H1's job is to say why a busy owner should care. */}
             <div className="overflow-hidden mb-1">
               <h1
-                className="hero-line font-display font-bold text-white opacity-0 pb-2 whitespace-nowrap"
-                style={{
-                  fontSize: headlineSize,
-                  lineHeight: 0.95,
-                  letterSpacing: "-0.03em",
-                }}
+                className="hero-line font-display font-bold text-white opacity-0 pb-2"
+                style={{ fontSize: headlineSize, lineHeight: 0.98, letterSpacing: "-0.03em" }}
               >
-                Logos.
-              </h1>
-            </div>
-            <div className="overflow-hidden mb-1">
-              <h1
-                className="hero-line font-display font-bold opacity-0 pb-2 whitespace-nowrap"
-                style={{
-                  fontSize: headlineSize,
-                  lineHeight: 0.95,
-                  letterSpacing: "-0.03em",
-                  color: "var(--blue)",
-                  WebkitTextStroke: "2px var(--blue)",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                Websites.
+                Software and websites
               </h1>
             </div>
             <div className="overflow-hidden mb-5 md:mb-8">
               <h1
-                className="hero-line font-display font-bold text-white opacity-0 pb-2 whitespace-nowrap"
-                style={{
-                  fontSize: headlineSize,
-                  lineHeight: 0.95,
-                  letterSpacing: "-0.03em",
-                }}
+                className="hero-line font-display font-bold opacity-0 pb-2"
+                style={{ fontSize: headlineSize, lineHeight: 0.98, letterSpacing: "-0.03em", color: "var(--accent)" }}
               >
-                Software.
+                for the way you actually work.
               </h1>
             </div>
 
@@ -118,20 +98,55 @@ export default function Hero() {
               className="hero-sub text-body-lg max-w-md mb-5 md:mb-8 opacity-0"
               style={{ color: "rgba(255,255,255,0.55)" }}
             >
-              Custom design and software for local businesses in Grays Harbor
-              County. Observed, built, and maintained by one local engineer.
+              Logos, websites, and custom business software for Grays Harbor
+              businesses. Built in Elma by one engineer who watches how your
+              operation runs, then builds what fits.
             </p>
 
-            <div className="hero-cta flex flex-wrap gap-3 opacity-0">
-              <a href="#contact" className="btn-primary px-6 md:px-8 py-3.5 md:py-4 text-sm">
-                Free Consultation
+            <div className="hero-cta flex flex-wrap items-center gap-4 opacity-0">
+              <a href={`tel:${PHONE}`} className="btn-primary px-6 md:px-8 py-3.5 md:py-4 text-sm">
+                Call for a free 20-min chat
               </a>
-              <a
-                href={`tel:${PHONE}`}
-                className="btn-ghost px-6 md:px-8 py-3.5 md:py-4 text-sm"
-              >
-                {PHONE_DISPLAY}
-              </a>
+              <span className="text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
+                or text{" "}
+                <a
+                  href={`sms:${PHONE}?&body=${encodeURIComponent("Hi Erik — I'd like to talk about my business.")}`}
+                  className="font-display font-semibold underline underline-offset-4"
+                  style={{ color: "rgba(255,255,255,0.85)" }}
+                >
+                  {PHONE_DISPLAY}
+                </a>
+              </span>
+            </div>
+
+            {/* Trust line: the person, up front. Pulled up from the footer where it was invisible. */}
+            <div className="hero-cta mt-6 flex items-center gap-3 opacity-0">
+              <span className="relative inline-block h-10 w-10 overflow-hidden rounded-full flex-shrink-0"
+                    style={{ border: "1px solid rgba(255,255,255,0.15)" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/erik.jpg" alt="Erik Bahena" className="h-full w-full object-cover object-top" />
+              </span>
+              <p className="text-sm leading-snug" style={{ color: "rgba(255,255,255,0.6)" }}>
+                <span className="font-display font-semibold" style={{ color: "rgba(255,255,255,0.9)" }}>Erik Bahena</span>
+                {" "}· from Elma · you talk to the person who builds it. No agency, no offshore.
+              </p>
+            </div>
+
+            {/* MOBILE showcase: the three real products, visible on the FIRST phone screen.
+                Desktop gets the fanned stack in the right column instead. */}
+            <div className="hero-showcase md:hidden mt-7 opacity-0">
+              <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory" style={{ scrollbarWidth: "none" }}>
+                {[
+                  { src: "/paintmate-dashboard.png", w: 3024, h: 1546, app: "PaintMate", cap: "Job costing · painting contractor" },
+                  { src: "/dynamic-stylz.png",       w: 1600, h: 1041, app: "dynamicstylz.com", cap: "Website · hair salon, Elma" },
+                  { src: "/herdlife-dashboard.png",  w: 2586, h: 1144, app: "HerdLife", cap: "Herd management · dairy" },
+                ].map((m) => (
+                  <div key={m.app} className="snap-start flex-shrink-0 w-[78%]">
+                    <BrowserFrame src={m.src} alt={m.cap} width={m.w} height={m.h} appName={m.app} sizes="80vw" aspectRatio="16 / 10" />
+                    <p className="mt-2 text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>{m.cap}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -215,27 +230,14 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Services list */}
-            <div className="hero-services opacity-0">
-              <div className="space-y-3 text-right">
-                {SERVICES.map((s) => (
-                  <a
-                    href="#services"
-                    key={s.n}
-                    className="flex items-baseline justify-end gap-4 group transition-all duration-200"
-                  >
-                    <span className="text-label opacity-30 text-white group-hover:opacity-60 transition-opacity">
-                      {s.n}
-                    </span>
-                    <span className="font-display font-semibold text-lg text-white/70 group-hover:text-white transition-colors">
-                      {s.label}
-                    </span>
-                    <span className="font-display text-sm font-medium text-accent w-24 text-right">
-                      {s.price}
-                    </span>
-                  </a>
-                ))}
-              </div>
+            {/* Compact services + price hint under the stack */}
+            <div className="hero-services opacity-0 flex gap-6 text-right">
+              {SERVICES.map((s) => (
+                <a href="#services" key={s.n} className="group">
+                  <span className="block font-display font-semibold text-sm text-white/70 group-hover:text-white transition-colors">{s.label}</span>
+                  <span className="block font-display text-xs font-medium text-accent">{s.price}</span>
+                </a>
+              ))}
             </div>
           </div>
         </div>
