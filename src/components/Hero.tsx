@@ -75,24 +75,22 @@ export default function Hero() {
               Elma, WA &nbsp;·&nbsp; Locally Owned
             </p>
 
-            {/* Promise-led headline. The three products live in the subhead + services grid;
-                the H1's job is to say why a busy owner should care. */}
-            <div className="overflow-hidden mb-1">
-              <h1
-                className="hero-line font-display font-bold text-white opacity-0 pb-2"
-                style={{ fontSize: headlineSize, lineHeight: 0.98, letterSpacing: "-0.03em" }}
-              >
-                Software and websites
-              </h1>
-            </div>
-            <div className="overflow-hidden mb-5 md:mb-8">
-              <h1
-                className="hero-line font-display font-bold opacity-0 pb-2"
-                style={{ fontSize: headlineSize, lineHeight: 0.98, letterSpacing: "-0.03em", color: "var(--accent)" }}
-              >
-                for the way you actually work.
-              </h1>
-            </div>
+            {/* Promise-led headline. One h1 for the document outline; the two
+                animated lines are block spans so GSAP can stagger them. */}
+            <h1 className="font-display font-bold" style={{ letterSpacing: "-0.03em" }}>
+              <span className="block overflow-hidden mb-1">
+                <span className="hero-line block text-white opacity-0 pb-2"
+                      style={{ fontSize: headlineSize, lineHeight: 0.98 }}>
+                  Software and websites
+                </span>
+              </span>
+              <span className="block overflow-hidden mb-5 md:mb-8">
+                <span className="hero-line block opacity-0 pb-2"
+                      style={{ fontSize: headlineSize, lineHeight: 0.98, color: "var(--accent)" }}>
+                  for the way you actually work.
+                </span>
+              </span>
+            </h1>
 
             <p
               className="hero-sub text-body-lg max-w-md mb-5 md:mb-8 opacity-0"

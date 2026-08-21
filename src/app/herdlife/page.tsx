@@ -17,6 +17,7 @@ const SMS_BODY = encodeURIComponent(
 );
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/herdlife" },
   title: "HerdLife — Custom Dairy Herd Management Software | Elma Digital",
   description:
     "Custom-built dairy herd management software. Open data, role-based access, inspector-ready reports. Replaces $75k+ AfiFarm installs at a fraction of the cost. Built by Elma Digital in Grays Harbor, WA.",

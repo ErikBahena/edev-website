@@ -16,6 +16,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.elmadigital.io"),
+  alternates: { canonical: "/" },
   title: "Elma Digital — Logos, Websites & Custom Software in Elma, WA",
   description:
     "Elma Digital serves Grays Harbor businesses with logo design, flyer design, website design, and custom software. Locally owned in Elma, WA. Call (360) 843-5566.",

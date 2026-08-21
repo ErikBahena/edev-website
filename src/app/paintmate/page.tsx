@@ -16,6 +16,7 @@ const SMS_BODY = encodeURIComponent(
 );
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/paintmate" },
   title: "PaintMate — Custom Software for Painters & Contractors | Elma Digital",
   description:
     "Phone clock-in, supplier integration, one-click invoicing for painting contractors and trades. Built around how your crew actually runs. Made by Elma Digital in Grays Harbor, WA.",

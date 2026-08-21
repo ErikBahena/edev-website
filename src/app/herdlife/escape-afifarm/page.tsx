@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description:
     "AfiFarm's $75,000+ install cost, proprietary data lock-in, and $130/cow/year fees don't fit how family dairies actually run. Here's what a custom AfiFarm alternative looks like — and what it really costs.",
   alternates: {
-    canonical: "https://elmadigital.io/herdlife/escape-afifarm",
+    canonical: "https://www.elmadigital.io/herdlife/escape-afifarm",
   },
   openGraph: {
     title: "Why Dairies Are Escaping AfiFarm",
@@ -41,7 +41,7 @@ const articleSchema = {
   },
   datePublished: "2026-05-22",
   dateModified: "2026-05-22",
-  mainEntityOfPage: "https://elmadigital.io/herdlife/escape-afifarm",
+  mainEntityOfPage: "https://www.elmadigital.io/herdlife/escape-afifarm",
 };
 
 export default function EscapeAfiFarmPost() {
