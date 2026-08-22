@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import GoogleAds from "@/components/GoogleAds";
+import ClarityAnalytics from "@/components/Clarity";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -93,6 +94,7 @@ export default function RootLayout({
       <body>
         {children}
         <GoogleAds />
+        <ClarityAnalytics />
       </body>
     </html>
   );
