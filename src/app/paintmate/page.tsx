@@ -198,6 +198,7 @@ export default function PaintMatePage() {
                   }}
                 />
                 <BrowserFrame
+                  href="#talk"
                   src="/paintmate-dashboard.png"
                   alt="PaintMate dashboard"
                   width={3024}
@@ -511,34 +512,7 @@ export default function PaintMatePage() {
               </a>
             </div>
 
-            <div
-              className="mb-12 max-w-2xl mx-auto p-5 rounded-xl"
-              style={{
-                background: "rgba(var(--accent-rgb),0.06)",
-                border: "1px solid rgba(var(--accent-rgb),0.3)",
-              }}
-            >
-              <p
-                className="text-sm mb-3"
-                style={{ color: "rgba(255,255,255,0.75)" }}
-              >
-                <strong style={{ color: "var(--accent)" }}>
-                  Ready to skip the call?
-                </strong>{" "}
-                Reserve a build slot directly. Sign a binding letter of
-                engagement online — Erik pre-signed his side; you sign yours;
-                Erik schedules discovery and issues a Stripe deposit invoice
-                within 5 business days.
-              </p>
-              <a
-                href="/reserve"
-                className="inline-flex items-center gap-2 font-display font-semibold text-sm"
-                style={{ color: "var(--accent)" }}
-              >
-                Reserve a slot · sign online
-                <span aria-hidden="true">→</span>
-              </a>
-            </div>
+            
 
             <p className="text-sm" style={{ color: "rgba(255,255,255,0.4)" }}>
               Or just{" "}

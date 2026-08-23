@@ -118,6 +118,7 @@ export default function WebDesignPage() {
 
             <div style={{ filter: "drop-shadow(0 28px 56px rgba(0,0,0,0.5))" }}>
               <BrowserFrame
+                href="https://dynamicstylz.com"
                 src="/dynamic-stylz.png"
                 alt="Dynamic Stylz Salon website, built by Elma Digital"
                 width={1600}
