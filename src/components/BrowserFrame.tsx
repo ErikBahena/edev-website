@@ -17,6 +17,12 @@ type Props = {
    */
   aspectRatio?: string;
   priority?: boolean;
+  /**
+   * Where this window goes when tapped. A BrowserFrame draws a URL bar, so
+   * visitors read it as a link and tap it — Clarity recorded dead clicks on
+   * exactly this. Give every frame a destination, or it lies about being one.
+   */
+  href?: string;
 };
 
 /**
@@ -34,8 +40,9 @@ export default function BrowserFrame({
   className = "",
   aspectRatio,
   priority = false,
+  href,
 }: Props) {
-  return (
+  const frame = (
     <div
       className={`rounded-xl overflow-hidden bg-white ${className}`}
       style={{
@@ -88,5 +95,19 @@ export default function BrowserFrame({
         priority={priority}
       />
     </div>
+  );
+
+  if (!href) return frame;
+
+  const external = href.startsWith("http");
+  return (
+    <a
+      href={href}
+      {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+      aria-label={`${appName} — open`}
+      className="block transition-transform duration-200 hover:-translate-y-0.5"
+    >
+      {frame}
+    </a>
   );
 }

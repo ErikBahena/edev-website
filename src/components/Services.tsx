@@ -22,6 +22,8 @@ type LogoProject = {
 
 type SiteProject = {
   kind: "site" | "software";
+  /** Where the frame goes when tapped — a drawn URL bar reads as a link. */
+  href?: string;
   src: string;
   alt: string;
   width: number;
@@ -83,6 +85,7 @@ const services: Service[] = [
     projects: [
       {
         kind: "site",
+        href: "https://dynamicstylz.com",
         src: "/dynamic-stylz.png",
         alt: "Dynamic Stylz Salon — hair salon website",
         width: 1600,
@@ -109,6 +112,7 @@ const services: Service[] = [
     projects: [
       {
         kind: "software",
+        href: "/paintmate",
         src: "/paintmate-dashboard.png",
         alt: "PaintMate work entries dashboard",
         width: 3024,
@@ -119,6 +123,7 @@ const services: Service[] = [
       },
       {
         kind: "software",
+        href: "/herdlife",
         src: "/herdlife-dashboard.png",
         alt: "HerdLife herd management dashboard",
         width: 2586,
@@ -347,6 +352,7 @@ function ProjectCard({ project }: { project: Project }) {
   return (
     <figure>
       <BrowserFrame
+        href={project.href}
         src={project.src}
         alt={project.alt}
         width={project.width}

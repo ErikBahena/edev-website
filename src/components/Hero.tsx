@@ -135,12 +135,12 @@ export default function Hero() {
             <div className="hero-showcase md:hidden mt-7 opacity-0">
               <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory" style={{ scrollbarWidth: "none" }}>
                 {[
-                  { src: "/paintmate-dashboard.png", w: 3024, h: 1546, app: "PaintMate", cap: "Job costing · painting contractor" },
-                  { src: "/dynamic-stylz.png",       w: 1600, h: 1041, app: "dynamicstylz.com", cap: "Website · hair salon, Elma" },
-                  { src: "/herdlife-dashboard.png",  w: 2586, h: 1144, app: "HerdLife", cap: "Herd management · dairy" },
+                  { src: "/paintmate-dashboard.png", w: 3024, h: 1546, app: "PaintMate", cap: "Job costing · painting contractor", href: "/paintmate" },
+                  { src: "/dynamic-stylz.png",       w: 1600, h: 1041, app: "dynamicstylz.com", cap: "Website · hair salon, Elma", href: "https://dynamicstylz.com" },
+                  { src: "/herdlife-dashboard.png",  w: 2586, h: 1144, app: "HerdLife", cap: "Herd management · dairy", href: "/herdlife" },
                 ].map((m) => (
                   <div key={m.app} className="snap-start flex-shrink-0 w-[78%]">
-                    <BrowserFrame src={m.src} alt={m.cap} width={m.w} height={m.h} appName={m.app} sizes="80vw" aspectRatio="16 / 10" />
+                    <BrowserFrame src={m.src} alt={m.cap} width={m.w} height={m.h} appName={m.app} sizes="80vw" aspectRatio="16 / 10" href={m.href} />
                     <p className="mt-2 text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>{m.cap}</p>
                   </div>
                 ))}
@@ -182,6 +182,7 @@ export default function Hero() {
                   height={1041}
                   appName="dynamicstylz.com"
                   sizes="280px"
+                  href="https://dynamicstylz.com"
                 />
               </div>
 
@@ -203,6 +204,7 @@ export default function Hero() {
                   height={1144}
                   appName="HerdLife"
                   sizes="300px"
+                  href="/herdlife"
                 />
               </div>
 
@@ -224,6 +226,7 @@ export default function Hero() {
                   height={1546}
                   appName="PaintMate"
                   sizes="400px"
+                  href="/paintmate"
                 />
               </div>
             </div>

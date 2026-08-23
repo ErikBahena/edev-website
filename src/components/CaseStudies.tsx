@@ -167,6 +167,7 @@ export default function CaseStudies() {
                   />
                   <div className="relative z-10">
                     <BrowserFrame
+                      href={p.learnMoreHref}
                       src={p.image}
                       alt={p.imageAlt}
                       width={p.imageWidth}
