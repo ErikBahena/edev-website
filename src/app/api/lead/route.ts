@@ -118,13 +118,17 @@ export async function POST(req: NextRequest) {
     // Optional immediate notification. Missing key = silently skipped.
     const key = process.env.RESEND_API_KEY;
     const to = process.env.LEAD_NOTIFY_EMAIL;
+    // Resend refuses any From on an unverified domain. Until elmadigital.io is
+    // verified there, fall back to Resend's shared sender, which delivers to
+    // the account owner. Set LEAD_NOTIFY_FROM once the domain is verified.
+    const from = process.env.LEAD_NOTIFY_FROM || "Elma Digital Leads <onboarding@resend.dev>";
     if (key && to) {
       try {
         await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
           body: JSON.stringify({
-            from: "Elma Digital <leads@elmadigital.io>",
+            from,
             to: [to],
             reply_to: isEmail ? contact : undefined,
             subject: `New enquiry - ${name}`,
