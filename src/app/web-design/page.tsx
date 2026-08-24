@@ -94,13 +94,13 @@ export default function WebDesignPage() {
               </p>
 
               <div className="flex flex-wrap items-center gap-4">
-                <a href={`tel:${PHONE}`} className="btn-primary px-7 py-4 text-sm">
-                  Call for a free 20-min chat
+                <a href="#talk" className="btn-primary px-7 py-4 text-sm">
+                  Get a free quote
                 </a>
                 <span className="text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
-                  or text{" "}
+                  or call/text{" "}
                   <a
-                    href={`sms:${PHONE}?&body=${SMS_BODY}`}
+                    href={`tel:${PHONE}`}
                     className="font-display font-semibold underline underline-offset-4"
                     style={{ color: "rgba(255,255,255,0.85)" }}
                   >
@@ -249,7 +249,7 @@ export default function WebDesignPage() {
           </div>
         </footer>
       </main>
-      <MobileActionBar smsBody="Hi Erik — I'm interested in a website for my business. Can we chat?" />
+      <MobileActionBar smsBody="Hi Erik — I'm interested in a website for my business. Can we chat?" formHref="#talk" />
     </>
   );
 }

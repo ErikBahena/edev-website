@@ -102,13 +102,13 @@ export default function Hero() {
             </p>
 
             <div className="hero-cta flex flex-wrap items-center gap-4 opacity-0">
-              <a href={`tel:${PHONE}`} className="btn-primary px-6 md:px-8 py-3.5 md:py-4 text-sm">
-                Call for a free 20-min chat
+              <a href="#contact" className="btn-primary px-6 md:px-8 py-3.5 md:py-4 text-sm">
+                Tell me what you need
               </a>
               <span className="text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
-                or text{" "}
+                or call/text{" "}
                 <a
-                  href={`sms:${PHONE}?&body=${encodeURIComponent("Hi Erik — I'd like to talk about my business.")}`}
+                  href={`tel:${PHONE}`}
                   className="font-display font-semibold underline underline-offset-4"
                   style={{ color: "rgba(255,255,255,0.85)" }}
                 >

@@ -17,7 +17,7 @@ export default function Home() {
     <>
       <GrainOverlay />
       <SmoothScroll />
-      <MobileCallButton />
+      <MobileCallButton formHref="#contact" />
       <Navigation />
 
       <main className="pb-[72px] md:pb-0">
