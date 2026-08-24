@@ -3,6 +3,7 @@ import Link from "next/link";
 import BrowserFrame from "@/components/BrowserFrame";
 import ProofStrip from "@/components/ProofStrip";
 import MobileActionBar from "@/components/MobileCallButton";
+import LeadForm from "@/components/LeadForm";
 
 /**
  * /web-design — the landing page for the "Grays Harbor Web Design" ad theme.
@@ -223,17 +224,21 @@ export default function WebDesignPage() {
 
         {/* Final CTA */}
         <section id="talk" className="bg-navy">
-          <div className="max-w-6xl mx-auto px-6 py-16 md:py-20 text-center">
-            <h2 className="font-display font-bold text-white" style={{ fontSize: "clamp(1.8rem, 4vw, 2.75rem)", letterSpacing: "-0.02em" }}>
-              Twenty minutes. No pitch. Just what you need.
-            </h2>
-            <p className="mt-4 mb-8" style={{ color: "rgba(255,255,255,0.6)" }}>
-              Tell me about your business. I&rsquo;ll tell you what a site would cost and how long it takes.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a href={`tel:${PHONE}`} className="btn-primary px-8 py-4 text-sm">Call {PHONE_DISPLAY}</a>
-              <a href={`sms:${PHONE}?&body=${SMS_BODY}`} className="btn-ghost px-8 py-4 text-sm">Text instead</a>
+          <div className="max-w-3xl mx-auto px-6 py-16 md:py-20">
+            <div className="text-center mb-9">
+              <h2 className="font-display font-bold text-white" style={{ fontSize: "clamp(1.8rem, 4vw, 2.75rem)", letterSpacing: "-0.02em" }}>
+                Twenty minutes. No pitch. Just what you need.
+              </h2>
+              <p className="mt-4" style={{ color: "rgba(255,255,255,0.6)" }}>
+                Tell me about your business. I&rsquo;ll tell you what a site would cost and how long it takes.
+              </p>
             </div>
+            <LeadForm
+              source="/web-design"
+              onDark
+              heading="Send me a note"
+              blurb="Quicker than a phone call. I answer the same day."
+            />
           </div>
         </section>
 

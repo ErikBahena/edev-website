@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import LeadForm from "@/components/LeadForm";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -188,32 +189,18 @@ export default function CTA() {
               </svg>
             </a>
 
-            {/* Primary action — SMS prefilled. Accent-colored to stand
-                apart from the phone + email cards above and give the
-                page a clear "do this one thing" moment. */}
-            <a
-              href={`sms:${PHONE}?body=${encodeURIComponent(SMS_INTRO)}`}
-              className="cta-reveal opacity-0 inline-flex items-center justify-center gap-2 mt-1 px-6 py-4 rounded-xl font-display font-semibold text-sm tracking-wide transition-all duration-200 hover:-translate-y-0.5"
-              style={{
-                background: "var(--accent)",
-                color: "var(--accent-fg)",
-                boxShadow: "0 8px 24px -8px rgba(var(--accent-rgb),0.4)",
-              }}
-            >
-              Start a Text Conversation
-              <svg
-                className="w-4 h-4"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14M13 5l7 7-7 7" />
-              </svg>
-            </a>
+            {/* Primary action is now the form. Ads showed four tel: "conversions"
+                that were dialer-opens, not calls — a form catches the person who
+                is interested but not ready to phone a stranger. Call/text stay
+                available directly above. */}
+            <div className="cta-reveal opacity-0 mt-2">
+              <LeadForm
+                source="/"
+                onDark
+                heading="Or just send me a note"
+                blurb="Quicker than a call. I answer the same day."
+              />
+            </div>
           </div>
         </div>
       </div>
